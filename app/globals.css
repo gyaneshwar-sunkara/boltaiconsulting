@@ -178,12 +178,24 @@
 @keyframes glow-pulse {
   0%,
   100% {
-    opacity: 1;
-    filter: blur(20px);
+    opacity: 0.6;
+    filter: blur(18px);
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    opacity: 0.5;
+    filter: blur(15px);
+    transform: scale(1.03) rotate(0.5deg);
   }
   50% {
-    opacity: 0.5;
-    filter: blur(30px);
+    opacity: 0.2;
+    filter: blur(25px);
+    transform: scale(1.06) rotate(-0.5deg);
+  }
+  75% {
+    opacity: 0.35;
+    filter: blur(20px);
+    transform: scale(1.02) rotate(0.25deg);
   }
 }
 
@@ -208,5 +220,30 @@
 }
 
 .animate-glow-pulse {
-  animation: glow-pulse 3s ease-in-out infinite;
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+/* Mobile optimizations - reduce motion for better performance */
+@media (max-width: 768px) {
+  .animate-glow-pulse {
+    animation: glow-pulse 8s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 4s linear infinite;
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-glow-pulse,
+    .animate-float,
+    .animate-shimmer,
+    .animate-lightning-pulse {
+      animation: none;
+    }
+  }
 }

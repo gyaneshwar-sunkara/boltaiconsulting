@@ -1,56 +1,66 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
-import { Zap, Brain, Rocket, Shield, Code, Sparkles } from "lucide-react"
-import { Card } from "@/components/ui/card"
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import { Zap, Brain, Rocket, Shield, Code, Sparkles } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 const features = [
   {
     icon: Zap,
     title: "Lightning-Fast Delivery",
-    description: "Ship products in days, not months. Our AI-powered workflow accelerates every stage of development.",
+    description:
+      "Ship products in days, not months. Our AI-powered workflow accelerates every stage of development.",
   },
   {
     icon: Brain,
     title: "AI-First Approach",
-    description: "Leverage cutting-edge AI models to automate repetitive tasks and focus on innovation.",
+    description:
+      "Leverage cutting-edge AI models to automate repetitive tasks and focus on innovation.",
   },
   {
     icon: Rocket,
     title: "Rapid Prototyping",
-    description: "Transform ideas into working prototypes instantly. Iterate faster than ever before.",
+    description:
+      "Transform ideas into working prototypes instantly. Iterate faster than ever before.",
   },
   {
     icon: Shield,
     title: "Enterprise-Grade Security",
-    description: "Built with security in mind. Your data and applications are protected at every layer.",
+    description:
+      "Built with security in mind. Your data and applications are protected at every layer.",
   },
   {
     icon: Code,
     title: "Clean, Scalable Code",
-    description: "Production-ready code that follows best practices and scales with your business.",
+    description:
+      "Production-ready code that follows best practices and scales with your business.",
   },
   {
     icon: Sparkles,
     title: "Intelligent Optimization",
-    description: "AI continuously optimizes performance, user experience, and resource utilization.",
+    description:
+      "AI continuously optimizes performance, user experience, and resource utilization.",
   },
-]
+];
 
 export function Features() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="features" ref={ref} className="relative py-20 md:py-32 overflow-hidden">
+    <section
+      id="features"
+      ref={ref}
+      className="relative py-20 md:py-32 overflow-hidden"
+    >
       <div
-        className="absolute top-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-foreground/25 blur-3xl animate-glow-pulse"
+        className="absolute top-1/4 right-1/4 h-[250px] w-[250px] md:h-[500px] md:w-[500px] rounded-full bg-foreground/15 md:bg-foreground/25 blur-2xl md:blur-3xl animate-glow-pulse"
         style={{ animationDelay: "0s" }}
       />
       <div
-        className="absolute bottom-1/3 left-1/4 h-[400px] w-[400px] rounded-full bg-foreground/20 blur-3xl animate-glow-pulse"
+        className="absolute bottom-1/3 left-1/4 h-[200px] w-[200px] md:h-[400px] md:w-[400px] rounded-full bg-foreground/10 md:bg-foreground/20 blur-2xl md:blur-3xl animate-glow-pulse"
         style={{ animationDelay: "1.5s" }}
       />
 
@@ -61,11 +71,12 @@ export function Features() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
+          <h2 className="mb-4 text-2xl sm:text-3xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
             Why Choose BoltAI?
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            Experience the future of software development with our AI-powered platform
+            Experience the future of software development with our AI-powered
+            platform
           </p>
         </motion.div>
 
@@ -76,9 +87,9 @@ export function Features() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
+              whileHover={{ y: -4 }}
             >
-              <Card className="group relative overflow-hidden border-border bg-card p-6 transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 h-full">
+              <Card className="group relative overflow-hidden border-border bg-card p-4 md:p-6 transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 h-full">
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0"
                   whileHover={{ opacity: 1 }}
@@ -86,14 +97,18 @@ export function Features() {
                 />
                 <div className="relative">
                   <motion.div
-                    className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary"
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
+                    className="mb-4 inline-flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-lg bg-primary/10 text-primary"
+                    whileHover={{ rotate: 180, scale: 1.05 }}
+                    transition={{ duration: 0.4 }}
                   >
                     <feature.icon className="h-6 w-6" />
                   </motion.div>
-                  <h3 className="mb-2 text-xl font-semibold text-card-foreground">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <h3 className="mb-2 text-xl font-semibold text-card-foreground">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
               </Card>
             </motion.div>
@@ -101,5 +116,5 @@ export function Features() {
         </div>
       </div>
     </section>
-  )
+  );
 }

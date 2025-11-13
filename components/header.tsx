@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Zap } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Zap } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Header() {
   return (
@@ -16,17 +16,23 @@ export function Header() {
       <nav className="container mx-auto flex items-center justify-between px-4 py-4 md:px-6">
         <motion.div
           className="flex items-center gap-2"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.02 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
           <div className="flex items-center gap-2">
             <motion.div
               animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, repeatDelay: 3 }}
+              transition={{
+                duration: 2,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatDelay: 3,
+              }}
             >
               <Zap className="h-6 w-6 text-foreground" fill="currentColor" />
             </motion.div>
-            <span className="text-xl font-bold tracking-tight text-foreground">BoltAI</span>
+            <span className="text-xl font-bold tracking-tight text-foreground">
+              BoltAI
+            </span>
           </div>
         </motion.div>
 
@@ -48,11 +54,13 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">Get Started</Button>
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm px-4">
+              Get Started
+            </Button>
           </motion.div>
         </div>
       </nav>
     </motion.header>
-  )
+  );
 }
