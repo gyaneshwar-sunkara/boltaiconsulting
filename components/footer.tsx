@@ -1,6 +1,6 @@
 "use client"
 
-import { Zap } from "lucide-react"
+import { Zap, Mail, Phone } from "lucide-react"
 
 export function Footer() {
   return (
@@ -45,26 +45,24 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-semibold text-foreground">Company</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <h3 className="mb-4 text-sm font-semibold text-foreground">Contact</h3>
+            <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
-                <a href="#about" className="transition-colors hover:text-foreground">
-                  About
+                <a
+                  href="mailto:gyanisunkara1@gmail.com"
+                  className="flex items-center gap-2 transition-colors hover:text-foreground"
+                >
+                  <Mail className="h-4 w-4" />
+                  gyanisunkara1@gmail.com
                 </a>
               </li>
               <li>
-                <a href="#" className="transition-colors hover:text-foreground">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="transition-colors hover:text-foreground">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="transition-colors hover:text-foreground">
-                  Contact
+                <a
+                  href="tel:+16892657246"
+                  className="flex items-center gap-2 transition-colors hover:text-foreground"
+                >
+                  <Phone className="h-4 w-4" />
+                  +1 (689) 265-7246
                 </a>
               </li>
             </ul>
