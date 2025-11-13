@@ -97,15 +97,15 @@ export function Hero() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
 
       <div
-        className="absolute top-1/4 left-1/4 h-72 w-72 md:h-[450px] md:w-[450px] rounded-full bg-foreground/25 md:bg-foreground/35 blur-3xl animate-glow-pulse"
+        className="hidden md:block absolute top-1/4 left-1/4 h-[450px] w-[450px] rounded-full bg-foreground/35 blur-3xl animate-glow-pulse"
         style={{ animationDelay: "0s" }}
       />
       <div
-        className="absolute bottom-1/4 right-1/4 h-72 w-72 md:h-[450px] md:w-[450px] rounded-full bg-foreground/30 md:bg-foreground/40 blur-3xl animate-glow-pulse"
+        className="hidden md:block absolute bottom-1/4 right-1/4 h-[450px] w-[450px] rounded-full bg-foreground/40 blur-3xl animate-glow-pulse"
         style={{ animationDelay: "1s" }}
       />
       <div
-        className="absolute top-1/2 right-1/3 h-56 w-56 md:h-80 md:w-80 rounded-full bg-foreground/25 md:bg-foreground/35 blur-3xl animate-glow-pulse"
+        className="hidden md:block absolute top-1/2 right-1/3 h-80 w-80 rounded-full bg-foreground/35 blur-3xl animate-glow-pulse"
         style={{ animationDelay: "2s" }}
       />
 
