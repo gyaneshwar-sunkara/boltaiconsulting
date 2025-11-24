@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 export function CTA() {
   return (
-    <section className="relative overflow-hidden py-20 md:py-32">
+    <section className="relative overflow-hidden py-16 md:py-24">
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[400px] md:h-[800px] md:w-[800px] rounded-full bg-foreground/15 md:bg-foreground/25 blur-2xl md:blur-3xl animate-glow-pulse"
         style={{ animationDelay: "0s" }}
@@ -30,16 +30,22 @@ export function CTA() {
             <Button
               size="lg"
               className="group bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8"
+              asChild
             >
-              Start Your Project
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <a href="#contact">
+                Start Your Project
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </a>
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-border bg-transparent text-foreground hover:bg-secondary text-base px-8"
+              asChild
             >
-              Schedule a Call
+              <a href="#contact">
+                Schedule a Call
+              </a>
             </Button>
           </div>
         </div>

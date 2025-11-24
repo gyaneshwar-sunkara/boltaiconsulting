@@ -8,7 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "BoltAI - Lightning-Fast AI Software Solutions",
+  title: "BoltAI - Tech Solutions at AI Speed",
   description:
     "Build fast, affordable software solutions with cutting-edge AI tools. BoltAI is your AI-powered tech studio for rapid development and innovation.",
   keywords: [
@@ -20,8 +20,11 @@ export const metadata: Metadata = {
     "affordable software",
   ],
   authors: [{ name: "BoltAI" }],
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
-    title: "BoltAI - Lightning-Fast AI Software Solutions",
+    title: "BoltAI - Tech Solutions at AI Speed",
     description:
       "Build fast, affordable software solutions with cutting-edge AI tools. BoltAI is your AI-powered tech studio for rapid development and innovation.",
     type: "website",
@@ -37,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BoltAI - Lightning-Fast AI Software Solutions",
+    title: "BoltAI - Tech Solutions at AI Speed",
     description: "Build fast, affordable software solutions with cutting-edge AI tools.",
     images: ["/og-image.png"],
   },
@@ -51,6 +54,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const theme = localStorage.getItem('boltai-theme') || 'dark';
+                document.documentElement.classList.add(theme);
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
         <ThemeProvider defaultTheme="dark" storageKey="boltai-theme">
           <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>

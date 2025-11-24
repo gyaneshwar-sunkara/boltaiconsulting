@@ -22,23 +22,28 @@ export function Footer() {
             <h3 className="mb-4 text-sm font-semibold text-foreground">Product</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <a href="#features" className="transition-colors hover:text-foreground">
+                <a href="/#features" className="transition-colors hover:text-foreground">
                   Features
                 </a>
               </li>
               <li>
-                <a href="#services" className="transition-colors hover:text-foreground">
+                <a href="/#services" className="transition-colors hover:text-foreground">
                   Services
                 </a>
               </li>
               <li>
-                <a href="#" className="transition-colors hover:text-foreground">
-                  Pricing
+                <a href="/blog" className="transition-colors hover:text-foreground">
+                  Blog
                 </a>
               </li>
               <li>
-                <a href="#" className="transition-colors hover:text-foreground">
-                  Case Studies
+                <a href="/faqs" className="transition-colors hover:text-foreground">
+                  FAQs
+                </a>
+              </li>
+              <li>
+                <a href="/#contact" className="transition-colors hover:text-foreground">
+                  Contact
                 </a>
               </li>
             </ul>
@@ -49,20 +54,20 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
                 <a
-                  href="mailto:gyanisunkara1@gmail.com"
+                  href="mailto:contact@boltaiconsulting.com"
                   className="flex items-center gap-2 transition-colors hover:text-foreground"
                 >
                   <Mail className="h-4 w-4" />
-                  gyanisunkara1@gmail.com
+                  contact@boltaiconsulting.com
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+16892657246"
+                  href="tel:+14077962376"
                   className="flex items-center gap-2 transition-colors hover:text-foreground"
                 >
                   <Phone className="h-4 w-4" />
-                  +1 (689) 265-7246
+                  +1 (407) 796-2376
                 </a>
               </li>
             </ul>

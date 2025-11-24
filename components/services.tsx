@@ -18,6 +18,7 @@ const services = [
       "API Integration",
       "Responsive Design",
     ],
+    link: "/services/web-applications",
   },
   {
     title: "Mobile Solutions",
@@ -29,6 +30,7 @@ const services = [
       "Push Notifications",
       "Offline Support",
     ],
+    link: "/services/mobile-solutions",
   },
   {
     title: "AI Integration",
@@ -40,6 +42,7 @@ const services = [
       "Natural Language",
       "Predictive Analytics",
     ],
+    link: "/services/ai-integration",
   },
 ];
 
@@ -51,7 +54,7 @@ export function Services() {
     <section
       id="services"
       ref={ref}
-      className="relative py-20 md:py-32 bg-secondary/30 overflow-hidden"
+      className="relative py-16 md:py-24 bg-secondary/30 overflow-hidden"
     >
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] md:h-[600px] md:w-[600px] rounded-full bg-foreground/10 md:bg-foreground/20 blur-2xl md:blur-3xl animate-glow-pulse"
@@ -120,9 +123,12 @@ export function Services() {
                   <Button
                     variant="ghost"
                     className="group/btn text-primary hover:text-primary hover:bg-primary/10"
+                    asChild
                   >
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    <a href={service.link}>
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    </a>
                   </Button>
                 </motion.div>
               </Card>
