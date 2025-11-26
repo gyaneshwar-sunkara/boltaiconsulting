@@ -92,24 +92,24 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-32">
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] z-0" />
 
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full z-0" />
 
       <div
-        className="hidden md:block absolute top-1/4 left-1/4 h-[450px] w-[450px] rounded-full bg-foreground/35 blur-3xl animate-glow-pulse"
+        className="hidden md:block absolute top-1/4 left-1/4 h-[450px] w-[450px] rounded-full bg-foreground/35 blur-3xl animate-glow-pulse z-0"
         style={{ animationDelay: "0s" }}
       />
       <div
-        className="hidden md:block absolute bottom-1/4 right-1/4 h-[450px] w-[450px] rounded-full bg-foreground/40 blur-3xl animate-glow-pulse"
+        className="hidden md:block absolute bottom-1/4 right-1/4 h-[450px] w-[450px] rounded-full bg-foreground/40 blur-3xl animate-glow-pulse z-0"
         style={{ animationDelay: "1s" }}
       />
       <div
-        className="hidden md:block absolute top-1/2 right-1/3 h-80 w-80 rounded-full bg-foreground/35 blur-3xl animate-glow-pulse"
+        className="hidden md:block absolute top-1/2 right-1/3 h-80 w-80 rounded-full bg-foreground/35 blur-3xl animate-glow-pulse z-0"
         style={{ animationDelay: "2s" }}
       />
 
-      <div className="container relative mx-auto px-6 md:px-6">
+      <div className="container relative mx-auto px-6 md:px-6 z-10">
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -168,7 +168,7 @@ export function Hero() {
             className="mb-12 sm:mb-10 text-lg text-muted-foreground md:text-xl leading-relaxed text-balance px-4 sm:px-0"
           >
             We craft custom software solutions tailored to your unique business
-            needs. No off-the-shelf products—just fast, affordable, and
+            needs. No off-the-shelf products - just fast, affordable, and
             intelligent solutions built with cutting-edge AI.
           </motion.p>
 
@@ -186,19 +186,22 @@ export function Hero() {
               <Button
                 size="lg"
                 className="group bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 w-full sm:w-auto"
+                asChild
               >
-                Start Building
-                <motion.div
-                  className="ml-2 inline-block"
-                  animate={{ x: [0, 3, 0] }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Number.POSITIVE_INFINITY,
-                    delay: 1,
-                  }}
-                >
-                  <ArrowRight className="h-4 w-4" />
-                </motion.div>
+                <a href="#contact">
+                  Start Building
+                  <motion.div
+                    className="ml-2 inline-block"
+                    animate={{ x: [0, 3, 0] }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Number.POSITIVE_INFINITY,
+                      delay: 1,
+                    }}
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </motion.div>
+                </a>
               </Button>
             </motion.div>
             <motion.div
@@ -210,8 +213,11 @@ export function Hero() {
                 size="lg"
                 variant="outline"
                 className="border-border bg-transparent text-foreground hover:bg-secondary text-base px-8 w-full sm:w-auto"
+                asChild
               >
-                View Our Work
+                <a href="#contact">
+                  View Our Work
+                </a>
               </Button>
             </motion.div>
           </motion.div>

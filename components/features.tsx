@@ -53,7 +53,7 @@ export function Features() {
     <section
       id="features"
       ref={ref}
-      className="relative py-20 md:py-32 overflow-hidden"
+      className="relative py-16 md:py-24 overflow-hidden"
     >
       <div
         className="absolute top-1/4 right-1/4 h-[250px] w-[250px] md:h-[500px] md:w-[500px] rounded-full bg-foreground/15 md:bg-foreground/25 blur-2xl md:blur-3xl animate-glow-pulse"
