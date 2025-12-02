@@ -114,20 +114,30 @@ export function Header() {
             How It Works
           </motion.a>
           <motion.a
-            href="/blog"
+            href="/projects"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.35 }}
             whileHover={{ scale: 1.05, color: "var(--color-foreground)" }}
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
-            Blog
+            Projects
+          </motion.a>
+          <motion.a
+            href="/blog"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+            whileHover={{ scale: 1.05, color: "var(--color-foreground)" }}
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Blogs
           </motion.a>
           <motion.a
             href="/faqs"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
+            transition={{ duration: 0.4, delay: 0.45 }}
             whileHover={{ scale: 1.05, color: "var(--color-foreground)" }}
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
