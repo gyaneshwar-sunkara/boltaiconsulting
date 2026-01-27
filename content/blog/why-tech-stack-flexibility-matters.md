@@ -74,7 +74,7 @@ To be fair, specialized agencies make sense in specific scenarios:
 ### Example: You Already Use React
 If your in-house team maintains a React app and you're adding features, hiring a React-specialized agency makes sense. They'll match your patterns and your team can maintain their work.
 
-## The BoltAI Approach: Technology Agnostic
+## The BoltBit Consulting Approach: Technology Agnostic
 
 We've delivered projects in 20+ tech stacks. Here's why:
 

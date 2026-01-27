@@ -129,7 +129,7 @@ AI accelerates the most expensive phase: initial MVP development.
 
 ## The AI Development Stack We Use
 
-At BoltAI, we've built our workflow around these tools:
+At BoltBit Consulting, we've built our workflow around these tools:
 
 ### **Code Generation**
 - GitHub Copilot: Real-time code suggestions

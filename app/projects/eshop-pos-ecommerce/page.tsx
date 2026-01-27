@@ -571,7 +571,7 @@ export default function EshopCaseStudy() {
         </div>
       </section>
 
-      {/* Why BoltAI Section */}
+      {/* Why BoltBit Consulting Section */}
       <section className="py-16 md:py-24 bg-secondary/30">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-12 lg:grid-cols-2 items-center">

@@ -7,7 +7,7 @@ import { ArrowRight, Check, Smartphone, Apple, Zap, Bell, CloudOff, Users } from
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Mobile Solutions - BoltAI Consulting",
+  title: "Mobile Solutions - BoltBit Consulting",
   description:
     "Native and cross-platform mobile apps for iOS and Android. Push notifications, offline support, and exceptional user experiences.",
 }

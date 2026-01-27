@@ -329,7 +329,7 @@ Flutter's growth rate is 2x React Native's. Google's investment is paying off.
 ### 4. **AI Development Tools Level the Playing Field**
 AI code generation tools (GitHub Copilot, Cursor, Claude Code) are making native development faster, reducing one of cross-platform's main advantages.
 
-## Our Approach at BoltAI
+## Our Approach at BoltBit Consulting
 
 We typically recommend cross-platform (React Native or Flutter) for 80% of clients because:
 1. Faster time-to-market

@@ -10,12 +10,12 @@ export function Footer() {
           <div className="md:col-span-2">
             <div className="mb-4 flex items-center gap-2">
               <Zap className="h-6 w-6 text-foreground" fill="currentColor" />
-              <span className="text-xl font-bold text-foreground">BoltAI</span>
+              <span className="text-xl font-bold text-foreground">BoltBit Consulting</span>
             </div>
             <p className="mb-4 max-w-md text-sm text-muted-foreground leading-relaxed">
               AI-powered tech studio building fast, affordable software solutions with cutting-edge technology.
             </p>
-            <p className="text-xs text-muted-foreground">© 2025 BoltAI. All rights reserved.</p>
+            <p className="text-xs text-muted-foreground">© 2025 BoltBit Consulting. All rights reserved.</p>
           </div>
 
           <div>
@@ -59,11 +59,11 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
                 <a
-                  href="mailto:contact@boltaiconsulting.com"
+                  href="mailto:contact@boltbitconsulting.com"
                   className="flex items-center gap-2 transition-colors hover:text-foreground"
                 >
                   <Mail className="h-4 w-4" />
-                  contact@boltaiconsulting.com
+                  contact@boltbitconsulting.com
                 </a>
               </li>
               <li>

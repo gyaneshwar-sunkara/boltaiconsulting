@@ -178,7 +178,7 @@ export default function ProjectsPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
-              Why Clients Choose BoltAI
+              Why Clients Choose BoltBit Consulting
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               We're not just another dev shop. Here's what sets us apart.

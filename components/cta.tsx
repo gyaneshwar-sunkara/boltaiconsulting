@@ -22,7 +22,7 @@ export function CTA() {
           </h2>
 
           <p className="mb-10 text-lg text-muted-foreground leading-relaxed md:text-xl">
-            Join hundreds of companies already building the future with BoltAI.
+            Join hundreds of companies already building the future with BoltBit Consulting.
             Get started today and experience the power of AI-driven development.
           </p>
 

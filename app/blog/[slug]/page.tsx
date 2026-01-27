@@ -21,7 +21,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} - BoltAI Blog`,
+    title: `${post.title} - BoltBit Consulting Blog`,
     description: post.description,
   }
 }

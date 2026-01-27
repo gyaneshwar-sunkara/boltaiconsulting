@@ -4,9 +4,9 @@ import { FAQ } from "@/components/faq"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "FAQs - BoltAI Consulting",
+  title: "FAQs - BoltBit Consulting",
   description:
-    "Frequently asked questions about BoltAI Consulting. Learn about our AI-powered development process, pricing, timelines, and services.",
+    "Frequently asked questions about BoltBit Consulting. Learn about our AI-powered development process, pricing, timelines, and services.",
 }
 
 export default function FAQPage() {

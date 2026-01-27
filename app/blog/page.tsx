@@ -7,9 +7,9 @@ import { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Blog - BoltAI Consulting",
+  title: "Blog - BoltBit Consulting",
   description:
-    "Insights on AI-powered development, software engineering best practices, and technology trends from the BoltAI team.",
+    "Insights on AI-powered development, software engineering best practices, and technology trends from the BoltBit Consulting team.",
 }
 
 export default function BlogPage() {

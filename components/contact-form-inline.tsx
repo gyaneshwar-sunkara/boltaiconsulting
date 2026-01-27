@@ -177,10 +177,10 @@ export function ContactFormInline({
                 Email
               </h4>
               <a
-                href="mailto:contact@boltaiconsulting.com"
+                href="mailto:contact@boltbitconsulting.com"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                contact@boltaiconsulting.com
+                contact@boltbitconsulting.com
               </a>
             </div>
           </div>

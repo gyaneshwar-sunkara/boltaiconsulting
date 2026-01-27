@@ -72,7 +72,7 @@ export function Features() {
           className="mb-16 text-center"
         >
           <h2 className="mb-4 text-2xl sm:text-3xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
-            Why Choose BoltAI?
+            Why Choose BoltBit Consulting?
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
             Experience the future of software development with our AI-powered

@@ -12,7 +12,7 @@ import {
 
 const faqs = [
   {
-    question: "How is BoltAI different from traditional development agencies?",
+    question: "How is BoltBit Consulting different from traditional development agencies?",
     answer:
       "We leverage cutting-edge AI tools to accelerate development by 10x. This means we can deliver in days what traditional agencies take weeks or months to build, at a fraction of the cost. We're not just faster - we maintain the same quality standards while being significantly more affordable.",
   },
@@ -80,7 +80,7 @@ export function FAQ() {
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
             Got questions? We've got answers. Here's everything you need to know
-            about working with BoltAI.
+            about working with BoltBit Consulting.
           </p>
         </motion.div>
 

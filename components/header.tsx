@@ -35,7 +35,7 @@ export function Header() {
               <Zap className="h-6 w-6 text-foreground" fill="currentColor" />
             </motion.div>
             <span className="text-xl font-bold tracking-tight text-foreground">
-              BoltAI Consulting
+              BoltBit Consulting
             </span>
           </div>
         </motion.a>

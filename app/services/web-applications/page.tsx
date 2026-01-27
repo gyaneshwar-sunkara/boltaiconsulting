@@ -7,7 +7,7 @@ import { ArrowRight, Check, Code, Smartphone, Zap, Shield, Database, Cpu } from 
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Web Applications - BoltAI Consulting",
+  title: "Web Applications - BoltBit Consulting",
   description:
     "Full-stack web applications built with modern frameworks and AI-powered features. React, Next.js, real-time features, and more.",
 }

@@ -7,7 +7,7 @@ import { ArrowRight, Check, Brain, MessageSquare, Eye, TrendingUp, Sparkles, Bot
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "AI Integration - BoltAI Consulting",
+  title: "AI Integration - BoltBit Consulting",
   description:
     "Embed intelligent features into your products with GPT-4, Claude, computer vision, NLP, and predictive analytics.",
 }

@@ -7,7 +7,7 @@ import { ArrowRight, Code, Smartphone, Brain, Zap, Users, TrendingUp } from "luc
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Services - BoltAI Consulting",
+  title: "Services - BoltBit Consulting",
   description:
     "Explore our AI-powered software development services: Web Applications, Mobile Solutions, and AI Integration.",
 }
@@ -185,7 +185,7 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              The BoltAI Advantage
+              The BoltBit Consulting Advantage
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
               Traditional agencies charge more and deliver slower. We flip that equation using AI.

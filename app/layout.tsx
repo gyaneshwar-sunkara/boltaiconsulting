@@ -8,9 +8,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "BoltAI - Tech Solutions at AI Speed",
+  title: "BoltBit Consulting - Tech Solutions at AI Speed",
   description:
-    "Build fast, affordable software solutions with cutting-edge AI tools. BoltAI is your AI-powered tech studio for rapid development and innovation.",
+    "Build fast, affordable software solutions with cutting-edge AI tools. BoltBit Consulting is your AI-powered tech studio for rapid development and innovation.",
   keywords: [
     "AI",
     "software development",
@@ -19,28 +19,28 @@ export const metadata: Metadata = {
     "fast development",
     "affordable software",
   ],
-  authors: [{ name: "BoltAI" }],
+  authors: [{ name: "BoltBit Consulting" }],
   icons: {
     icon: "/favicon.svg",
   },
   openGraph: {
-    title: "BoltAI - Tech Solutions at AI Speed",
+    title: "BoltBit Consulting - Tech Solutions at AI Speed",
     description:
-      "Build fast, affordable software solutions with cutting-edge AI tools. BoltAI is your AI-powered tech studio for rapid development and innovation.",
+      "Build fast, affordable software solutions with cutting-edge AI tools. BoltBit Consulting is your AI-powered tech studio for rapid development and innovation.",
     type: "website",
-    url: "https://boltai.dev",
+    url: "https://boltbitconsulting.com",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "BoltAI - AI-Powered Tech Studio",
+        alt: "BoltBit Consulting - AI-Powered Tech Studio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "BoltAI - Tech Solutions at AI Speed",
+    title: "BoltBit Consulting - Tech Solutions at AI Speed",
     description: "Build fast, affordable software solutions with cutting-edge AI tools.",
     images: ["/og-image.png"],
   },
@@ -59,7 +59,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                const theme = localStorage.getItem('boltai-theme') || 'dark';
+                const theme = localStorage.getItem('boltbit-theme') || 'dark';
                 document.documentElement.classList.add(theme);
               } catch (e) {}
             `,
@@ -67,7 +67,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
-        <ThemeProvider defaultTheme="dark" storageKey="boltai-theme">
+        <ThemeProvider defaultTheme="dark" storageKey="boltbit-theme">
           <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
         </ThemeProvider>
         <Analytics />
