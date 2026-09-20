@@ -1,342 +1,103 @@
 ---
-title: "How to Choose a Software Development Partner (Without Getting Burned)"
-description: "Hiring the wrong development agency can cost you years and hundreds of thousands. Learn the red flags, green flags, and questions to ask before signing anything."
+title: "How to Choose a Software Development Partner"
+description: "Running a selection properly: how many firms to approach, how to make quotes comparable, what to check in a portfolio, and the contract terms that matter."
 date: "2024-11-10"
-author: ""
-tags: ["Hiring", "Agencies", "Outsourcing", "Due Diligence"]
+author: "SillStack"
+tags: ["Hiring", "Agencies", "Procurement", "Due Diligence"]
 category: "Business & Strategy"
-readTime: "8 min read"
+readTime: "9 min read"
 featured: false
+services: ["product-discovery"]
+practices: ["product-strategy", "managed-services"]
+seoTitle: "Choosing a Dev Partner"
 ---
 
-"They seemed so good in the sales call. Now it's month 4, we're 3x over budget, and the product barely works."
+Most people choose a development firm badly, and not because they are careless. They run the process in an order that makes a good decision impossible: approach several firms with a loose description, collect wildly different numbers, and then pick using the only dimension that is actually comparable, which is price.
 
-We hear this story weekly from companies who hired the wrong development partner.
+This is about running it in a better order. A separate post covers [the warning signs that a firm will not finish](/blog/how-to-tell-a-software-agency-will-disappear) — worth reading alongside, because that one is about individual firms and this one is about the process.
 
-Here's your guide to avoiding that nightmare.
+## Start by writing down what you want, badly
 
-## Red Flags (Run Away)
+Not a specification. You do not have one yet, and if you had one you would not need this.
 
-### 1. "We Can Build Anything"
-**What they mean:** "We don't understand your specific needs well enough to say no."
+A page. What is going wrong today, who it affects, what you have already tried, which systems are involved, and any date that matters. Written in your own words, describing the process rather than the software you think you need.
 
-Good developers know their limits. If an agency claims expertise in blockchain AND AI AND IoT AND gaming AND fintech AND healthcare, they're probably mediocre at all of them.
+This page does two jobs. It gives every firm the same starting point, which is the only way their responses will be comparable. And the quality of what comes back is itself the first filter: a firm that responds with questions about your process is thinking; a firm that responds with a proposal has stopped listening.
 
-**Green flag:** "We specialize in X and Y, but we partner with specialists for Z."
+## Three firms, not seven
 
-### 2. "We Need 50% Upfront, Rest on Completion"
-**The problem:** Zero incentive to finish or deliver quality.
+Seven feels thorough. It is not. It is a fortnight of calls, seven documents in seven formats, and a decision made on whoever was most recently persuasive.
 
-We've seen agencies take the deposit, deliver garbage, then disappear.
+Three is enough to see a range. Pick them deliberately: ideally one that has worked in your sector, one that has solved your *shape* of problem elsewhere, and one that somebody you trust has actually used. If two of the three tell you the same uncomfortable thing about your project, that thing is true.
 
-**Green flag:** Milestone-based payments tied to deliverables (25% kickoff, 25% design approval, 25% feature completion, 25% launch).
+## Make the quotes comparable, or do not bother comparing them
 
-### 3. "We'll Estimate After You Pay Us"
-**Translation:** "We have no idea how long this takes."
+This is where almost every selection goes wrong.
 
-Legitimate agencies can estimate based on requirements. Vague estimates mean inexperience or intentional underpricing to win the contract.
+A $15,000 quote and a $60,000 quote for "the same project" are not usually a judgement about value. They are quotes for different projects. One has assumed the integration is out of scope. One has assumed you will supply the designs. One has read the same page you sent and priced the version they think you actually need.
 
-**Green flag:** Detailed breakdown of features, hours, and costs before you commit.
+You have two honest options.
 
-### 4. "Our Developers Are in [Country] But We're Based Here"
-**Why it matters:** Nothing wrong with offshore development IF management is competent. But "we're just the sales team" means communication nightmares.
+**Pay for the scoping, from one firm.** A discovery engagement produces a written specification — screens, rules, edge cases, what is explicitly out of scope. You keep it whether or not you continue with them, and you can hand it to the other two. Now the quotes are comparable because all three are pricing the same document. This costs money up front and it is by a distance the most reliable way to run this.
 
-**Questions to ask:**
-- "Who's my day-to-day contact?"
-- "What timezone are they in?"
-- "Can I meet the actual developers?"
+**Or force a like-for-like breakdown.** Ask every firm for the same structure: a list of screens, the integrations included, who supplies design, what testing is included, what happens after launch, and a dated out-of-scope list. If a firm will not produce that, you have learned something.
 
-**Green flag:** Direct access to development team, regardless of location.
+What does not work is comparing three totals. The lowest number is very often the firm that understood the least, and you pay the difference later as change requests.
 
-### 5. "We Don't Show Work in Progress"
-**What they're hiding:** Either nothing is being built, or what's being built is wrong.
+## What to actually check in a portfolio
 
-**Green flag:** Weekly demos, daily access to staging environment, transparent progress.
+Screenshots prove nothing. Anyone can produce a screenshot.
 
-### 6. "Trust Us, We're Experts"
-When they deflect questions with "technical jargon" or "you wouldn't understand," run.
+**Something running that you can open.** A live URL beats everything. Use it. Click into the parts that would be hard — the search, the filtering, the thing that would need real data behind it.
 
-**Green flag:** They explain technical decisions in plain English and welcome your questions.
+**Code you can look at, or somebody who can.** If you have a technical person, ask for a repository or a representative sample. You are not auditing it. You are looking for tests, for readable structure, for commit history that looks like a team rather than one heroic weekend.
 
-### 7. "We Use Our Proprietary Framework"
-**Translation:** Vendor lock-in. You can never leave them.
+**A written account of one hard decision.** This is the best signal available and almost nobody asks for it. Ask a firm to explain the hardest technical decision on a recent project and what they would do differently. A firm that has genuinely operated software has a real answer and usually a slightly painful one. A firm that has not will describe a feature instead.
 
-**Green flag:** Open-source, industry-standard technologies that any developer can maintain.
+**Who actually did it.** The work in a portfolio was done by specific people. Ask whether those people are still there and whether they would be on yours.
 
-## Green Flags (Good Signs)
+## The questions worth asking
 
-### 1. They Ask About Your Business, Not Just Features
-Good partners understand:
-- Who your customers are
-- What problem you're solving
-- How you'll make money
-- What success looks like
+Six, and what you are listening for.
 
-**Red flag:** They just ask "what features do you want?"
+**Who writes the code, and can I meet them this week?** Vagueness here is the strongest predictor of a bad engagement. If the people who scope it are not the people who build it, context gets lost at the handover and you pay for the gap in rework.
 
-### 2. They Push Back on Bad Ideas
-"I don't think you need that feature" is a green flag, not a red one.
+**What happens when you underestimate?** Under fixed price the answer should be "that is our problem". Watch how fast it comes.
 
-Yes-men agencies build whatever you ask for, even if it's wrong. Good partners challenge assumptions.
+**When do I see working software, and how often after that?** Weekly or fortnightly is healthy. "At the end of each phase" means you find out too late to steer. A demo should be something you click, not a slide with a percentage on it.
 
-### 3. They Show Real Work
-- Actual code samples
-- Live products they've built
-- Client references you can call
-- Case studies with metrics
+**What is explicitly not included?** A firm that has thought about your project can list four or five things immediately. A firm that says "we will handle everything" has not read your page.
 
-**Red flag:** Only show pretty mockups and generic "we built an app for healthcare/fintech/etc."
+**Who owns the code, and from when?** The answer should be you, from the first commit, in a repository in your own organisation. Not handed over at the end.
 
-### 4. They're Transparent About Risks
-"This might take longer than expected because..."
-"The main risk here is..."
-"We haven't built this exact thing before, but..."
+**What happens if we want to stop?** For a project: what you keep. For a retainer: the notice period and what handover includes. Ask before you sign, when it is a hypothetical and the answer is honest.
 
-Honesty about risks beats over-confidence.
+## Structure the money to match the risk
 
-### 5. They Have a Clear Process
-- How requirements are gathered
-- How progress is tracked
-- How changes are handled
-- How issues are resolved
+The pattern that protects you is simple: **payments land after deliverables, not before them.**
 
-**Red flag:** "We're agile so we figure it out as we go" (that's not how agile works).
+A large deposit before anything exists removes the pressure that keeps a project moving. Milestone payments tied to things you can actually inspect — the signed specification, the first working demo, feature-complete, live — keep both sides pointed the same way. Retainers are different and monthly in advance is normal there, because you are buying capacity rather than an outcome.
 
-## Questions to Ask (And What to Listen For)
+Be wary of hourly for a defined build. Hourly means the party doing the estimating benefits from having estimated badly, which is a structural problem rather than a question of anyone's honesty. We wrote out the full argument in [fixed price versus hourly](/blog/fixed-price-vs-hourly-software).
 
-### About Their Team
+## The three contract terms that matter
 
-**Q: "Who will actually work on my project?"**
-**Good answer:** Names, experience levels, their expertise. Bonus: You can meet them.
-**Bad answer:** "Our team of senior developers" (generic, vague).
+Most of a development agreement is boilerplate you will never invoke. Three clauses are worth reading properly.
 
-**Q: "What's your developer turnover rate?"**
-**Good answer:** <15% annually.
-**Bad answer:** They don't know, or it's >30%.
+**Ownership and when it transfers.** You want the code, the repository and the infrastructure accounts, with transfer at creation rather than at final payment. The version where ownership transfers on completion gives a firm leverage at exactly the moment you are most exposed.
 
-**Q: "Can I review developers' resumes?"**
-**Good answer:** Yes, here they are.
-**Bad answer:** "We can't share that" or send generic/fake profiles.
+**The change process.** Changes should be re-quoted in writing and approved before work starts. The mechanism matters more than the rate. What you are avoiding is the conversation where work you did not authorise appears on a final invoice.
 
-### About Their Process
+**Exit.** Notice period, what handover includes, and whether documentation and training are deliverables or favours. A firm that has written a clean exit into the agreement is not planning to leave. It is telling you it does not need to trap you.
 
-**Q: "How do you handle scope changes?"**
-**Good answer:** Clear change request process, documented, priced before work begins.
-**Bad answer:** "We're flexible, we figure it out."
+## The thing nobody tells you
 
-**Q: "What if I'm unhappy with the work?"**
-**Good answer:** Specific revision process, quality guarantees, money-back scenarios.
-**Bad answer:** "That never happens" or vague promises.
+The best possible outcome of a selection process is sometimes that a firm talks you out of the project.
 
-**Q: "How do you handle delays?"**
-**Good answer:** Transparent communication, revised timeline, possibly adjusted pricing.
-**Bad answer:** "We're always on time" (lie) or "that's your responsibility."
+Buying existing software. Fixing the process before automating it. Hiring somebody permanent instead. Any firm willing to say one of those is giving up revenue to tell you the truth, and that is information about how they will behave in month three when something is going wrong and it would be easier not to mention it.
 
-### About Technology
-
-**Q: "Why are you recommending this tech stack?"**
-**Good answer:** Detailed reasoning tied to your specific needs, timeline, budget, team.
-**Bad answer:** "It's what we know" or "it's the best."
-
-**Q: "Can my team maintain this code?"**
-**Good answer:** Yes, it uses standard technologies. Here's our documentation process.
-**Bad answer:** "You'll need us for maintenance."
-
-**Q: "What happens to the code ownership?"**
-**Good answer:** You own everything, full rights, code repository access from day one.
-**Bad answer:** "We maintain ownership" or "we'll transfer it at the end."
-
-### About Past Projects
-
-**Q: "Can I talk to 3 references?"**
-**Good answer:** Yes, here are their contacts. (And they actually answer and say good things.)
-**Bad answer:** "We can't share client information" or give you fake/unhelpful references.
-
-**Q: "What was your biggest project failure and what did you learn?"**
-**Good answer:** Specific example, honest about mistakes, clear lessons learned.
-**Bad answer:** "We don't fail" or deflect the question.
-
-**Q: "Can I see code from a similar project?"**
-**Good answer:** Yes (sanitized/anonymized if needed), or at least architecture diagrams.
-**Bad answer:** "Everything is NDA'd."
-
-## Cost and Timeline Questions
-
-**Q: "What's your hourly rate?"**
-**Common rates (US):**
-- Offshore ($25-$50/hour)
-- Nearshore ($50-$100/hour)
-- Onshore ($100-$200/hour)
-
-Too cheap = likely inexperienced or bait-and-switch.
-Too expensive = you're paying for overhead, not talent.
-
-**Q: "What's included in your estimate?"**
-**Should include:**
-- Development
-- Testing
-- Deployment
-- Bug fixes (first 30 days)
-- Documentation
-
-**Not usually included:**
-- Design (if you don't have it)
-- Third-party service costs (AWS, APIs)
-- Major scope changes
-
-**Q: "What happens if you go over budget?"**
-**Good answer:** Fixed price or not-to-exceed cap with documented exceptions.
-**Bad answer:** "We bill hourly, whatever it takes."
-
-## The Portfolio Test
-
-Ask to see 3 recent projects. Evaluate:
-
-### Code Quality
-**If they share code:**
-- Is it readable?
-- Are there tests?
-- Is it documented?
-- Does it follow best practices?
-
-**If they won't share code:** Red flag.
-
-### Live Products
-**Visit the live applications:**
-- Do they work well?
-- Are they fast?
-- Good UX?
-- Still being maintained?
-
-**If they only show screenshots:** Red flag.
-
-### Client Outcomes
-**Ask about results:**
-- Did it launch on time?
-- Within budget?
-- Is it still in use?
-- Did it achieve business goals?
-
-**If they only talk about features:** Red flag.
-
-## The Contract Test
-
-Before signing, review for:
-
-### Must-Haves
-- Detailed scope of work
-- Timeline with milestones
-- Payment schedule tied to deliverables
-- IP ownership (you should own everything)
-- Termination clause
-- Bug fix guarantee (30-90 days typical)
-
-### Red Flags
-- Vague deliverables
-- Large upfront payment
-- They retain code ownership
-- No termination clause
-- Open-ended timeline
-- "Time and materials" with no cap
-
-## Size Matters
-
-### Freelancer ($10K-$40K)
-**Pros:** Cheap, direct communication, flexible
-**Cons:** Limited capacity, single point of failure, slower
-**Good for:** Simple projects, MVPs, budget-conscious startups
-
-### Small Agency 5-15 people ($25K-$100K)
-**Pros:** Affordable, still nimble, can handle complexity
-**Cons:** Limited simultaneous projects, may lack specializations
-**Good for:** Most projects, ideal sweet spot for startups
-
-### Large Agency 50+ people ($100K-$500K+)
-**Pros:** Resources, specialists, enterprise processes
-**Cons:** Expensive, slower, bureaucratic
-**Good for:** Enterprise projects, complex systems, post-Series B
-
-### Our sweet spot: 10-person teams. Big enough for expertise, small enough for speed.
-
-## The Gut Check
-
-After all the analysis, trust your gut:
-
-### Good Feelings
-- They listen more than they talk
-- They ask smart questions
-- You feel understood
-- Communication is clear
-- They're enthusiastic about your project
-
-### Bad Feelings
-- Pushy sales tactics
-- Over-promise results
-- Dismissive of your concerns
-- Communication is confusing
-- They seem bored or disinterested
-
-**Your instinct matters.**
-
-## The Trial Project
-
-Before committing to a $100K+ project, consider:
-
-**Option 1: Paid Discovery ($5K-$15K, 1-2 weeks)**
-- Detailed requirements
-- Architecture design
-- Accurate estimate
-- No obligation to proceed
-
-**Option 2: Proof of Concept ($15K-$30K, 2-4 weeks)**
-- Build one core feature
-- Test their competence
-- Validate communication
-- Decide whether to continue
-
-**Why it's smart:**
-- $15K lesson vs $100K mistake
-- See their actual work quality
-- Test the relationship
-- Get valuable deliverables even if you switch
-
-## Final Checklist
-
-Before signing:
-- [ ] Met actual developers (not just sales)
-- [ ] Saw 3+ real projects they've built
-- [ ] Called 3+ references
-- [ ] Reviewed detailed estimate
-- [ ] Understood the tech stack choice
-- [ ] Clear communication process
-- [ ] Milestone-based payments
-- [ ] Code ownership to you
-- [ ] 30-90 day bug fix guarantee
-- [ ] Termination clause exists
-- [ ] Gut feeling is positive
-
-## Conclusion
-
-Choosing a development partner is like choosing a co-founder. You're trusting them with your vision, your money, and your timeline.
-
-The right partner:
-- Understands your business
-- Challenges bad ideas
-- Communicates transparently
-- Delivers quality on time
-- Sets you up for long-term success
-
-The wrong partner:
-- Costs 3x the estimate
-- Delivers 6 months late
-- Builds the wrong product
-- Leaves you with unmaintainable code
-- Damages your business
-
-Do your homework. Ask hard questions. Trust your gut.
-
-Your product's success depends on it.
+If all three of your firms enthusiastically agree with everything you said, you did not test them hard enough.
 
 ---
 
-**Want an honest assessment of your project?** [Get in touch](/#contact) for a free consultation. No sales pressure, just real advice.
+**Want to run this on us?** [Ask us every question above](/contact). If the answers do not satisfy you, that is useful information either way.

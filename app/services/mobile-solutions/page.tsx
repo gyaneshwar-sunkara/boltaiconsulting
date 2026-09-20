@@ -1,213 +1,129 @@
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { ContactFormInline } from "@/components/contact-form-inline"
-import { ArrowRight, Check, Smartphone, Apple, Zap, Bell, CloudOff, Users } from "lucide-react"
 import { Metadata } from "next"
+import {
+  Smartphone, Bell, CloudOff, CreditCard, Fingerprint, MapPin,
+  RefreshCw, Store,
+} from "lucide-react"
+import { ServicePage, type ServiceConfig } from "@/components/service-page"
 
 export const metadata: Metadata = {
-  title: "Mobile Solutions - BoltBit Consulting",
+  title: "Mobile App Development",
   description:
-    "Native and cross-platform mobile apps for iOS and Android. Push notifications, offline support, and exceptional user experiences.",
+    "iOS and Android apps built from one codebase, shipped to both stores. Offline-first, push notifications, in-app payments. Fixed price, four to six weeks.",
+  alternates: { canonical: "/services/mobile-solutions" },
 }
 
-export default function MobileSolutionsPage() {
-  const features = [
+const config: ServiceConfig = {
+  slug: "mobile-solutions",
+  eyebrow: "Mobile Apps",
+  icon: Smartphone,
+  title: "One codebase. Both stores. No compromises anyone notices.",
+  lede:
+    "React Native and Expo, shipped to the App Store and Google Play. Your customers can't tell it isn't native, and you aren't paying two teams to build the same product twice.",
+  facts: [
+    ["4 – 6 weeks", "scope to store submission"],
+    ["Fixed price", "against a written scope"],
+    ["1 codebase", "iOS and Android"],
+  ],
+  forWho: [
     {
-      icon: Apple,
-      title: "iOS & Android",
-      description: "Native apps for both platforms with platform-specific optimizations.",
+      title: "Your customers are on their phones, not a desk",
+      body: "Drivers, field staff, patients, diners. People who will never open a laptop to do the thing you need them to do, and who bounce off a mobile browser experience.",
     },
     {
-      icon: Smartphone,
-      title: "Cross-Platform",
-      description: "React Native and Flutter for unified codebase across platforms.",
+      title: "You were quoted twice for the same app",
+      body: "Two teams, two codebases, two sets of bugs, two release cycles that drift apart. For most products that's a decision made in 2015 and never revisited.",
     },
     {
-      icon: Bell,
-      title: "Push Notifications",
-      description: "Real-time engagement with intelligent notification systems.",
+      title: "It has to work without signal",
+      body: "A stockroom, a basement kitchen, a delivery van. If the app stops being useful when the bars disappear, staff stop using it and go back to paper.",
+    },
+  ],
+  capabilities: [
+    {
+      icon: Store,
+      title: "iOS & Android from one codebase",
+      body: "React Native with Expo. Shared business logic, platform-specific behaviour where it genuinely matters — navigation patterns, permissions, share sheets.",
     },
     {
       icon: CloudOff,
-      title: "Offline Support",
-      description: "Full functionality even without internet connection.",
+      title: "Offline-first architecture",
+      body: "Local database, queued writes, conflict resolution on reconnect. The app keeps working with no signal and reconciles cleanly when it comes back.",
     },
     {
-      icon: Users,
-      title: "User-Centric Design",
-      description: "Intuitive interfaces designed for mobile-first experiences.",
+      icon: Bell,
+      title: "Push notifications",
+      body: "Targeted, scheduled and event-triggered. Delivery tracking so you know what actually landed rather than what was theoretically sent.",
     },
     {
-      icon: Zap,
-      title: "High Performance",
-      description: "Optimized for speed, battery life, and smooth animations.",
+      icon: CreditCard,
+      title: "In-app payments & subscriptions",
+      body: "Apple and Google in-app purchase where the stores require it, Stripe where they don't. Receipt validation and subscription state handled server-side.",
     },
-  ]
+    {
+      icon: Fingerprint,
+      title: "Biometric & device auth",
+      body: "Face ID, Touch ID, secure keychain storage, and session handling that doesn't log people out every time they switch apps.",
+    },
+    {
+      icon: MapPin,
+      title: "Location & device features",
+      body: "Background location, camera and barcode scanning, file access, Bluetooth. The hardware integrations a mobile browser simply cannot reach.",
+    },
+    {
+      icon: RefreshCw,
+      title: "Over-the-air updates",
+      body: "Ship most fixes without waiting days for store review. Critical bugs get resolved the same afternoon rather than the following week.",
+    },
+    {
+      icon: Smartphone,
+      title: "Store submission & review",
+      body: "Listings, screenshots, privacy declarations, and the review process itself. We handle the rejections, which are routine and rarely about your code.",
+    },
+  ],
+  process: [
+    { phase: "Week 1", label: "Scope", body: "Screen-by-screen flow, platform decisions, store account setup, and a written specification you sign off before anything is built." },
+    { phase: "Week 2–3", label: "Build", body: "Core screens, data layer, offline sync and authentication. You get a TestFlight or internal-track build on Friday — on your actual device, not a simulator video." },
+    { phase: "Week 4", label: "Build", body: "Notifications, payments, device integrations and polish. Second build to your phone, plus the edge cases that only appear on real hardware." },
+    { phase: "Week 5–6", label: "Ship", body: "Store submission, review responses, staged rollout, analytics and crash reporting. Store review is the one part of the timeline nobody controls." },
+  ],
+  deliverables: [
+    "Apps published to the App Store and Google Play under your accounts",
+    "Source code in a repository you own from the first commit",
+    "Store listings, screenshots and privacy declarations",
+    "Crash reporting and analytics, configured and explained",
+    "Over-the-air update pipeline so you can ship fixes fast",
+    "Admin interface for managing content and notifications",
+    "30 days of post-launch fixes at no additional cost",
+  ],
+  stack: [
+    { group: "App", items: "React Native, Expo, TypeScript, React Navigation" },
+    { group: "Local data", items: "SQLite, MMKV, offline sync queues" },
+    { group: "Backend", items: "NestJS, PostgreSQL, Redis, push infrastructure" },
+    { group: "Delivery", items: "EAS Build, TestFlight, Play Console, Sentry" },
+  ],
+  pricing: {
+    duration: "Fixed price · four to six weeks",
+    note: "Mobile runs longer than web because store review is outside anyone's control. One scope covers both platforms; it is not quoted per store.",
+  },
+  faqs: [
+    { q: "Why React Native and not fully native?", a: "For most products the difference is invisible to users and the cost difference is roughly half. If you're building something that genuinely needs native — heavy 3D, complex audio processing, deep platform APIs — we'll tell you, and we'll tell you before you've paid us anything." },
+    { q: "Who owns the App Store accounts?", a: "You do. We set them up under your business and work as invited collaborators. If we part ways, your apps and reviews stay exactly where they are." },
+    { q: "How long does store review take?", a: "Apple is typically one to three days, Google usually faster. First submissions attract more scrutiny. We build the buffer into the timeline and handle rejections — they're routine, and normally about metadata rather than code." },
+    { q: "Can it share a backend with our website?", a: "Yes, and it should. One API serving both means one source of truth and one place to fix things. If you already have a web app we'll build against that rather than duplicating it." },
+    { q: "What about updates after launch?", a: "Most changes ship over the air within minutes, skipping review entirely. Anything touching native modules needs a store release. We'll show your team how to do both." },
+    { q: "Do you do app design too?", a: "Yes. Interface design is included in the price — we don't quote a separate design phase and then a separate build phase for the same product." },
+  ],
+  related: [
+    { href: "/services/web-applications", label: "Web Applications", blurb: "The admin side and customer portal, sharing one backend with the app." },
+    { href: "/services/ai-integration", label: "AI Integration", blurb: "In-app assistants, scanning, and document capture from the camera." },
+    { href: "/services/search-visibility", label: "Search Visibility", blurb: "App store optimisation and getting found before the download." },
+  ],  schema: { path: "/services/mobile-solutions" },
+  closing: {
+    title: "What would your customers do on their phone?",
+    body: "Tell us what your customers are currently doing badly on a mobile browser, or not doing at all. We'll come back with a scope, a number and a store-submission date.",
+  },
+}
 
-  const benefits = [
-    "Native iOS apps (Swift/SwiftUI)",
-    "Native Android apps (Kotlin/Jetpack Compose)",
-    "Cross-platform apps (React Native/Flutter)",
-    "Mobile e-commerce and marketplace apps",
-    "Social networking and community apps",
-    "Health and fitness tracking apps",
-    "On-demand service apps (Uber-like)",
-    "Mobile banking and fintech solutions",
-  ]
-
-  return (
-    <main className="min-h-screen bg-background">
-      <Header />
-
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30" />
-
-        <div className="container relative mx-auto px-4 md:px-6">
-          <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm text-primary">
-              <Smartphone className="h-4 w-4" />
-              <span>Mobile Solutions</span>
-            </div>
-
-            <h1 className="mb-6 text-4xl sm:text-5xl font-bold tracking-tight text-foreground md:text-6xl">
-              Mobile Apps That Users Love
-            </h1>
-
-            <p className="mb-8 text-lg text-muted-foreground leading-relaxed md:text-xl">
-              We create native and cross-platform mobile applications that deliver exceptional user experiences.
-              From consumer apps to enterprise solutions, we build mobile products that scale.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-                <a href="/#contact">
-                  Start Your Project
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <a href="/#how-it-works">How It Works</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              Mobile App Features
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Everything you need for a world-class mobile application
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => (
-              <Card key={index} className="p-6 border-border bg-card hover:border-primary/50 transition-all">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <feature.icon className="h-6 w-6" />
-                </div>
-                <h3 className="mb-2 text-xl font-semibold text-card-foreground">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24 bg-secondary/30">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid gap-12 lg:grid-cols-2 items-center">
-            <div>
-              <h2 className="mb-6 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-                Mobile Solutions We Build
-              </h2>
-              <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-                Whether you need a native iOS app, Android app, or cross-platform solution, we deliver excellence.
-              </p>
-
-              <div className="grid gap-3">
-                {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10">
-                      <Check className="h-4 w-4 text-primary" />
-                    </div>
-                    <span className="text-foreground">{benefit}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Card className="p-8 border-border bg-card">
-              <h3 className="mb-4 text-2xl font-bold text-card-foreground">
-                Flexible Mobile Tech Stack
-              </h3>
-              <p className="mb-6 text-sm text-muted-foreground leading-relaxed">
-                We work with your preferred mobile technologies or recommend the best approach for your app. Here are some of the technologies we specialize in:
-              </p>
-              <div className="space-y-4">
-                <div>
-                  <h4 className="mb-2 font-semibold text-foreground">iOS Development</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Swift, SwiftUI, UIKit, Objective-C, Combine, Core Data, and more
-                  </p>
-                </div>
-                <div>
-                  <h4 className="mb-2 font-semibold text-foreground">Android Development</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Kotlin, Jetpack Compose, Java, Coroutines, Room, Retrofit, Dagger
-                  </p>
-                </div>
-                <div>
-                  <h4 className="mb-2 font-semibold text-foreground">Cross-Platform</h4>
-                  <p className="text-sm text-muted-foreground">
-                    React Native, Flutter, Expo, Ionic, Xamarin, TypeScript
-                  </p>
-                </div>
-                <div>
-                  <h4 className="mb-2 font-semibold text-foreground">Backend & Cloud</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Firebase, AWS Amplify, Azure, Supabase, GraphQL, REST APIs, WebSockets
-                  </p>
-                </div>
-              </div>
-              <div className="mt-6 p-6 rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/30 shadow-lg">
-                <h5 className="text-base font-bold text-foreground mb-2">
-                  Your Tech Stack, Not Ours
-                </h5>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Need native performance or prefer cross-platform? We build with whatever technology fits your goals, team expertise, and existing infrastructure. Your choice, our expertise.
-                </p>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="mb-16 text-center">
-            <h2 className="mb-6 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              Ready to Build Your Mobile App?
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
-              Let's create a mobile experience that your users will love and competitors will envy.
-            </p>
-          </div>
-          <ContactFormInline />
-        </div>
-      </section>
-
-      <Footer />
-    </main>
-  )
+export default function MobileSolutionsPage() {
+  return <ServicePage c={config} />
 }

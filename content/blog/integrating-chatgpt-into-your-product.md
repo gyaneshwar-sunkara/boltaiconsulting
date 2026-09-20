@@ -1,440 +1,125 @@
 ---
-title: "Integrating ChatGPT into Your Product: A Complete Guide for 2025"
-description: "Learn how to integrate ChatGPT and GPT-4 into your product with this comprehensive guide. Includes cost analysis, implementation strategies, and real-world examples."
+title: "Integrating an LLM into Your Product Without Regretting It"
+description: "The two integration patterns that survive real users, what the API actually costs at volume, and the five failures that catch most teams in the first month."
 date: "2024-11-18"
-author: ""
-tags: ["ChatGPT", "AI Integration", "GPT-4", "Product Development", "API"]
+author: "SillStack"
+tags: ["LLM", "AI Integration", "Architecture", "Product Development"]
 category: "AI & Development"
-readTime: "12 min read"
+readTime: "11 min read"
 featured: true
+services: ["ai-integration"]
+practices: ["ai-automation", "product-engineering"]
+seoTitle: "Integrating LLMs Into Products"
 ---
 
-ChatGPT isn't just a chatbot anymore—it's a product feature. In 2025, AI-powered features are table stakes, not differentiators. But integrating ChatGPT the right way can still give you a massive competitive advantage.
+Adding a language model to a product is easy. Adding one that is still switched on a year later is a different exercise, and the difference is decided almost entirely by decisions made before anybody writes a prompt.
 
-This guide will show you exactly how to integrate OpenAI's GPT models into your product, what it costs, common pitfalls, and real-world examples from our client work.
+This is the practical version: what to build, what it costs, and the failures that show up in month one.
 
-## Why Integrate ChatGPT?
+## Start with the only question that matters
 
-The question isn't whether to add AI features—it's how and where. Here's why companies are integrating GPT models:
+**Can the user tell when the output is wrong?**
 
-### 1. **Enhanced User Experience**
-- Intelligent search that understands intent
-- Conversational interfaces that feel natural
-- Content generation that saves users hours
+Features that survive answer yes. Features that get quietly disabled answer no.
 
-### 2. **Operational Efficiency**
-- 24/7 customer support without human agents
-- Automated content creation and summarization
-- Data analysis and insights generation
+A model that is right nine times in ten is genuinely valuable when the tenth is visible — somebody notices, corrects it, moves on. The same accuracy is dangerous when the tenth is invisible, because people stop checking after a week or so and the errors accumulate with an air of authority.
 
-### 3. **Competitive Advantage**
-- Features competitors can't match without AI
-- Personalization at scale
-- Faster user onboarding
+Run every idea past that before costing anything.
 
-**Real Impact:**
-One of our e-commerce clients added GPT-powered product recommendations. Result: 32% increase in average order value, 18% boost in conversion rate. Cost to implement: $8,000 over 2 weeks.
+## The two patterns worth building
 
-## Understanding the ChatGPT API Options
+### Retrieval over content you own
 
-OpenAI offers several models. Choosing the right one matters for both performance and cost.
+Do not ask the model to know things. Search your own material for the passages relevant to the question, hand those to the model, and ask it to answer from them with a citation back to the source.
 
-### GPT-4o (Recommended for Most Use Cases)
-- **Best for:** General-purpose applications, customer support, content generation
-- **Cost:** $2.50 per 1M input tokens, $10.00 per 1M output tokens
-- **Speed:** Fast (optimized for production)
-- **Context:** 128K tokens (~96,000 words)
+This satisfies the test directly. When the retrieved passage is wrong, the citation exposes it. When nothing relevant comes back, a well-built system says so rather than inventing something.
 
-### GPT-4 Turbo
-- **Best for:** Complex reasoning, coding assistance, detailed analysis
-- **Cost:** $10.00 per 1M input tokens, $30.00 per 1M output tokens
-- **Speed:** Moderate
-- **Context:** 128K tokens
-
-### GPT-3.5 Turbo
-- **Best for:** Simple tasks, high-volume low-cost applications
-- **Cost:** $0.50 per 1M input tokens, $1.50 per 1M output tokens
-- **Speed:** Very fast
-- **Context:** 16K tokens (~12,000 words)
+The engineering is not in the prompt. It is in chunking documents at sensible boundaries, choosing and tuning an embedding approach, and then genuinely evaluating whether the right passage comes back for a realistic set of questions. Build an evaluation set of fifty real questions with known correct sources before you build the interface. Teams skip this, and it is the single best predictor of whether the thing is still in use next year.
 
-### Our Recommendation
-Start with **GPT-4o** for 90% of use cases. It's the sweet spot of performance, speed, and cost. Only upgrade to GPT-4 Turbo if you need maximum reasoning capability.
-
-## Cost Analysis: What Will It Actually Cost?
+### Extraction with a confidence threshold
 
-Let's break down real-world costs for common use cases.
+The model reads something unstructured — a receipt, an invoice, a form, an inbound email — and returns structured fields. Anything below a confidence threshold goes to a review queue rather than into the database.
 
-### Use Case 1: Customer Support Chatbot
+The threshold is the design. We use this in [Larder](/work/larder) for receipt capture: photograph a receipt, get stock movements, with anything uncertain held for a person. Without the threshold you have a system that is right most of the time and silently wrong the rest, which is worse than no automation at all.
 
-**Assumptions:**
-- 1,000 conversations/day
-- Average conversation: 10 messages
-- Average message length: 50 tokens
-- GPT-4o model
+Three things make it work: a threshold tuned against real examples rather than guessed, a review queue somebody actually works, and a record of every correction so you can tell whether accuracy is moving.
 
-**Calculation:**
-- Input tokens per day: 1,000 conversations × 10 messages × 50 tokens = 500,000 tokens
-- Output tokens per day: ~500,000 tokens (similar length responses)
-- Daily cost: (0.5M × $2.50/1M) + (0.5M × $10/1M) = $1.25 + $5.00 = **$6.25/day**
-- **Monthly cost: ~$190**
+### What does not hold up
 
-That's replacing one customer support agent (cost: $3,000-$5,000/month) with $190 in API costs.
-
-### Use Case 2: Content Generation Tool
-
-**Assumptions:**
-- 500 users/day
-- Each generates 3 articles
-- Each article: 1,000 words output (~1,333 tokens)
-- GPT-4o model
-
-**Calculation:**
-- Prompts (input): 500 users × 3 articles × 100 tokens = 150,000 tokens
-- Generated content (output): 500 × 3 × 1,333 = 2M tokens
-- Daily cost: (0.15M × $2.50/1M) + (2M × $10/1M) = $0.38 + $20.00 = **$20.38/day**
-- **Monthly cost: ~$611**
-
-### Use Case 3: Document Analysis Platform
-
-**Assumptions:**
-- 200 documents analyzed/day
-- Average document: 5,000 words (~6,667 tokens)
-- Summary output: 500 words (~667 tokens)
-- GPT-4o model
-
-**Calculation:**
-- Input: 200 × 6,667 = 1.33M tokens
-- Output: 200 × 667 = 133,000 tokens
-- Daily cost: (1.33M × $2.50/1M) + (0.133M × $10/1M) = $3.33 + $1.33 = **$4.66/day**
-- **Monthly cost: ~$140**
-
-### Key Takeaway
-For most applications, ChatGPT API costs are surprisingly low—typically $100-$1,000/month. The ROI is massive if it improves user experience or automates tasks.
-
-## Implementation Architecture
-
-Here's the architecture we use for most ChatGPT integrations:
-
-```
-User → Your Frontend → Your Backend API → OpenAI API → Response
-           ↓              ↓
-        Cache         Rate Limiting
-                    & Cost Control
-```
-
-### Key Components
-
-#### 1. **Backend Proxy (Essential)**
-Never call OpenAI directly from the frontend. Always proxy through your backend for:
-- **Security:** Protect API keys
-- **Rate limiting:** Prevent abuse
-- **Caching:** Reduce costs
-- **Monitoring:** Track usage and costs
-- **Prompt engineering:** Keep prompts server-side
-
-#### 2. **Caching Layer**
-Cache common queries to reduce API calls:
-- Identical queries within 24 hours
-- FAQ-style questions
-- Product descriptions or summaries
-
-**Impact:** One client reduced API costs by 40% with smart caching.
-
-#### 3. **Rate Limiting**
-Prevent abuse and control costs:
-- Per-user limits (e.g., 50 messages/day)
-- Global limits (e.g., 10,000 requests/hour)
-- Progressive limits (free users: 10/day, paid: unlimited)
-
-#### 4. **Streaming Responses**
-For chatbot interfaces, stream responses token-by-token:
-- Better UX (users see progress)
-- Perceived speed improvement
-- Ability to stop generation early
-
-## Step-by-Step Implementation
-
-### Step 1: Get API Access
-1. Sign up at https://platform.openai.com
-2. Add payment method
-3. Generate API key
-4. Set usage limits ($10/day recommended for testing)
-
-### Step 2: Basic Integration (Node.js Example)
-
-```javascript
-// server.js
-import OpenAI from 'openai';
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-app.post('/api/chat', async (req, res) => {
-  try {
-    const { message, conversationHistory } = req.body;
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
-      messages: [
-        {
-          role: "system",
-          content: "You are a helpful assistant for an e-commerce platform."
-        },
-        ...conversationHistory,
-        { role: "user", content: message }
-      ],
-      temperature: 0.7,
-      max_tokens: 500,
-    });
-
-    res.json({
-      response: completion.choices[0].message.content,
-      usage: completion.usage
-    });
-  } catch (error) {
-    console.error('OpenAI API Error:', error);
-    res.status(500).json({ error: 'Failed to generate response' });
-  }
-});
-```
-
-### Step 3: Add Streaming for Better UX
-
-```javascript
-app.post('/api/chat/stream', async (req, res) => {
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
-
-  const stream = await openai.chat.completions.create({
-    model: "gpt-4o",
-    messages: req.body.messages,
-    stream: true,
-  });
-
-  for await (const chunk of stream) {
-    const content = chunk.choices[0]?.delta?.content || '';
-    if (content) {
-      res.write(`data: ${JSON.stringify({ content })}\n\n`);
-    }
-  }
-
-  res.end();
-});
-```
-
-### Step 4: Implement Caching
-
-```javascript
-import Redis from 'redis';
-const redis = Redis.createClient();
-
-async function getCachedOrFetch(prompt) {
-  // Check cache first
-  const cached = await redis.get(prompt);
-  if (cached) return JSON.parse(cached);
-
-  // Call OpenAI
-  const response = await openai.chat.completions.create({...});
-
-  // Cache for 24 hours
-  await redis.setEx(prompt, 86400, JSON.stringify(response));
-
-  return response;
-}
-```
-
-### Step 5: Add Cost Monitoring
-
-```javascript
-// Track costs in real-time
-function calculateCost(usage, model) {
-  const pricing = {
-    'gpt-4o': { input: 2.50, output: 10.00 },
-    'gpt-4-turbo': { input: 10.00, output: 30.00 },
-  };
-
-  const inputCost = (usage.prompt_tokens / 1_000_000) * pricing[model].input;
-  const outputCost = (usage.completion_tokens / 1_000_000) * pricing[model].output;
-
-  return inputCost + outputCost;
-}
-
-// Log every request
-await logToDatabase({
-  userId,
-  model,
-  inputTokens: usage.prompt_tokens,
-  outputTokens: usage.completion_tokens,
-  cost: calculateCost(usage, model),
-  timestamp: new Date()
-});
-```
-
-## Prompt Engineering: The Secret Sauce
-
-The same API can produce terrible or amazing results depending on your prompt. Here's what works:
-
-### Bad Prompt
-```
-"Answer the user's question about products"
-```
-
-### Good Prompt
-```
-"You are a knowledgeable e-commerce assistant for TechGadgets.com.
-
-Your role:
-- Help customers find the right products
-- Provide detailed product information
-- Compare products when asked
-- Never make up product details
-- If unsure, say "I'll connect you with a human agent"
-
-Tone: Friendly, helpful, concise
-
-Response format:
-- Keep answers under 100 words
-- Use bullet points for lists
-- Include product links when relevant
-
-Current conversation:
-{conversation_history}
-
-Customer question: {user_message}
-"
-```
-
-### Prompt Engineering Best Practices
-
-1. **Define the role clearly:** "You are a [specific role] who [does what]"
-2. **Set constraints:** Token limits, response format, tone
-3. **Provide context:** User history, product catalog, company policies
-4. **Show examples:** Few-shot learning dramatically improves quality
-5. **Handle edge cases:** What to do when uncertain or asked inappropriate questions
-
-## Common Pitfalls and How to Avoid Them
-
-### 1. **Hallucinations**
-**Problem:** GPT makes up facts or product details.
-
-**Solution:**
-- Use Retrieval-Augmented Generation (RAG)
-- Provide context in prompts
-- Instruct model to say "I don't know" when uncertain
-- Validate responses against your database
-
-### 2. **Inconsistent Responses**
-**Problem:** Same question gets different answers.
-
-**Solution:**
-- Lower temperature (0.3-0.5 for consistency)
-- Use system messages to enforce format
-- Cache common queries
-
-### 3. **Cost Spirals**
-**Problem:** Unexpectedly high API bills.
-
-**Solution:**
-- Set hard limits in OpenAI dashboard
-- Implement per-user rate limiting
-- Monitor costs daily
-- Use GPT-3.5 for simple tasks
-
-### 4. **Slow Responses**
-**Problem:** Users wait too long for answers.
-
-**Solution:**
-- Use streaming for chat interfaces
-- Optimize prompt length
-- Cache common responses
-- Consider GPT-4o-mini for speed
-
-### 5. **Context Window Limitations**
-**Problem:** Conversations get too long.
-
-**Solution:**
-- Summarize conversation history
-- Keep only last 5-10 exchanges
-- Use vector database for relevant context retrieval
-
-## Advanced: Retrieval-Augmented Generation (RAG)
-
-For knowledge-based applications, RAG is essential:
-
-```
-User Query → Vector Search → Retrieve Relevant Docs → Include in Prompt → GPT Response
-```
-
-**Example:**
-User asks: "What's your return policy for electronics?"
-
-1. Search vector database for "return policy electronics"
-2. Retrieve top 3 relevant policy documents
-3. Include in prompt context
-4. GPT generates answer based on actual policies
-
-**Implementation:**
-- Use Pinecone, Weaviate, or Chroma for vector storage
-- Embed documents with OpenAI's text-embedding-ada-002
-- Retrieve top-k similar documents for each query
-- Include in GPT prompt as context
-
-## Real-World Success Stories
-
-### Case Study 1: Legal Document Assistant
-**Client:** Law firm with 500+ lawyers
-
-**Challenge:** Lawyers spend 3-4 hours/day searching through case files and legal documents.
-
-**Solution:**
-- Embedded 10 years of case law in vector database
-- GPT-4 with RAG for intelligent search
-- Conversational interface for complex queries
-
-**Results:**
-- Research time reduced from 3 hours to 30 minutes
-- 85% accuracy on legal precedent queries
-- $2M/year in time savings
-- Cost: $1,200/month API fees
-
-### Case Study 2: E-Learning Platform
-**Client:** Online course platform with 50,000 students
-
-**Challenge:** Student support team overwhelmed with repetitive questions.
-
-**Solution:**
-- GPT-4o-powered tutoring assistant
-- Personalized learning recommendations
-- Automated assignment feedback
-
-**Results:**
-- 60% reduction in support tickets
-- 4.8/5 student satisfaction score
-- 22% improvement in course completion rates
-- Cost: $450/month API fees
-
-## Getting Started Checklist
-
-- [ ] Define your use case and success metrics
-- [ ] Calculate expected API costs
-- [ ] Set up OpenAI account with spending limits
-- [ ] Build backend API proxy
-- [ ] Implement rate limiting
-- [ ] Add caching layer
-- [ ] Craft and test prompts
-- [ ] Build frontend interface
-- [ ] Add monitoring and cost tracking
-- [ ] Test with real users
-- [ ] Iterate based on feedback
-
-## Conclusion
-
-Integrating ChatGPT into your product is easier and cheaper than you think. The technology is mature, the costs are reasonable, and the potential impact is enormous.
-
-The key is starting small: Pick one feature, implement it well, measure the impact, then expand. Don't try to AI-ify your entire product at once.
+A general chat window bolted onto a product, asked to answer anything, with no retrieval and no verification path. It demos beautifully. It is abandoned within a quarter, because the first confidently wrong answer costs more trust than a hundred correct ones earn.
+
+If a proposal's centrepiece is a chat box, ask what the feature is worth if nobody opens it. Most AI features work far better placed inside the workflow — a "summarise this" button where the document already is, rather than an assistant waiting to be consulted.
+
+## What it actually costs
+
+Pricing changes constantly, so work in shape rather than in numbers.
+
+You pay per token, in and out, and output typically costs several times input. A token is roughly three-quarters of a word. The practical consequence is that **your cost is driven by input volume, not by how clever the feature is.**
+
+That catches people. A support assistant that stuffs twenty retrieved passages plus a long system prompt into every request is paying for all of it on every single call, however short the answer.
+
+Estimate like this: average input tokens per request, times requests per month, plus output tokens times requests. Do it for your realistic volume and again for ten times that. If the second number is alarming, you have learned something now rather than after launch.
+
+Three levers, in order of effect:
+
+**Retrieve less.** Five well-chosen passages beat twenty mediocre ones on both cost and quality. Better search is cheaper than more context.
+
+**Cache.** A surprising share of requests in most products are near-duplicates. Cache on a normalised form of the input, with a sensible expiry. This is often the largest single saving available and it is not sophisticated.
+
+**Use a smaller model for the easy work.** Classification, routing, short extraction and summarisation rarely need the frontier model. Reserve it for the requests that are genuinely hard. Route by request type, not by hope.
+
+## Architecture: the parts people leave out
+
+The naive integration calls the provider from your application and returns the result. It works until it does not. Four things belong in the design from the start.
+
+**Your own abstraction over the provider.** One internal interface, one place that knows about the vendor's SDK. Providers change pricing, deprecate models and have outages. If the vendor's client is called from thirty files, all of those are your problem on the day something changes.
+
+**Streaming.** Responses take seconds. Streaming turns "is this broken?" into "it is working", and it is a small amount of work for a large perceptual difference. If a request is genuinely slow, stream it or move it to a job with a notification — do not leave a spinner running for fifteen seconds.
+
+**Timeouts, retries and a fallback.** Providers have bad days. Set an aggressive timeout, retry with backoff and jitter, and decide in advance what the product does when the model is unavailable. "The page errors" is a decision; make it deliberately rather than by omission.
+
+**Logging of prompts, responses and cost, per request.** You cannot improve what you cannot see, and you cannot debug a complaint about a wrong answer without the input that produced it. Log the model version too, because behaviour changes between versions and you will want to know which one produced something.
+
+## Prompts: less mystique than advertised
+
+Most of the gains are unremarkable.
+
+Say what the model is and who it is for. Give it the context explicitly rather than assuming. State the output format precisely, and if you need structured output, use the provider's structured output or function-calling support rather than asking politely for JSON and parsing hopefully. Tell it what to do when it does not know — an explicit instruction to say so is more effective than most people expect.
+
+Two or three examples of good output beat several paragraphs of description.
+
+And treat prompts as code. Version them, keep them in the repository, and re-run your evaluation set when you change one. A prompt tweak that fixes the case in front of you and breaks four others is the most common self-inflicted wound in this work, and without an evaluation set you will not even know it happened.
+
+## The five failures, in the order they arrive
+
+**Confident invention.** The model produces something plausible and wrong. Mitigation: retrieval with citations, an explicit instruction to decline when unsupported, and a visible path for the user to check. Do not try to prompt your way out of this — it is an architecture problem.
+
+**Inconsistency.** The same input gives different answers on different days. Lower the temperature for anything that should be deterministic, pin the model version explicitly, and hold the prompt stable. Providers update models; if you have not pinned, your behaviour changes without a deploy.
+
+**Cost running away.** Usually one of three things: an unbounded retry loop, a feature that turned out to be far more popular than forecast, or a growing context window nobody noticed. Set a hard spend alert on day one, before launch, not after the first surprising invoice.
+
+**Slowness.** Long prompts and large outputs are slow. Stream, cache, use a smaller model where it suffices, and move anything genuinely long-running into a background job.
+
+**Context limits.** Long conversations and large documents overflow the window. Summarise older turns rather than truncating them, chunk documents deliberately, and retrieve the relevant part instead of sending everything and hoping.
+
+## Before you ship
+
+- The evaluation set exists and the feature passes it.
+- A spend alert is configured and someone receives it.
+- Prompts, responses, model version and cost are logged per request.
+- There is a defined behaviour when the provider is down.
+- A person can see what the model got wrong, and correct it.
+- You know what the feature costs at ten times current volume.
+- Somebody owns the review queue, by name.
+
+If you cannot tick the first and the last, the feature is not ready regardless of how well it demos.
+
+## What we would tell you on a call
+
+Pick the narrowest useful thing. Ship it where a wrong answer is immediately visible and costs an eyebrow rather than money. Log everything. Watch what people actually correct for a month, and let that tell you whether to expand.
+
+The most common mistake is not technical. It is starting with the most impressive feature instead of the most verifiable one.
 
 ---
 
-**Need help integrating ChatGPT into your product?** [Get in touch](/#contact) and we'll build a custom AI solution tailored to your needs.
+**Thinking about adding one?** [Tell us what you want the model to do](/contact) and we'll tell you whether it is a good fit before anyone writes a prompt.

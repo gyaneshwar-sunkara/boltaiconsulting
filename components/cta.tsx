@@ -5,49 +5,43 @@ import { ArrowRight } from "lucide-react";
 
 export function CTA() {
   return (
-    <section className="relative overflow-hidden py-16 md:py-24">
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[400px] md:h-[800px] md:w-[800px] rounded-full bg-foreground/15 md:bg-foreground/25 blur-2xl md:blur-3xl animate-glow-pulse"
-        style={{ animationDelay: "0s" }}
-      />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] md:h-[600px] md:w-[600px] rounded-full bg-foreground/20 md:bg-foreground/35 blur-2xl md:blur-3xl animate-glow-pulse"
-        style={{ animationDelay: "1.5s" }}
-      />
+    <section className="bd bd-mesh overflow-hidden border-t border-border bg-background py-20 md:py-28">
 
       <div className="container relative mx-auto px-4 md:px-6">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="mb-6 text-3xl sm:text-4xl font-bold tracking-tight text-foreground md:text-6xl text-balance">
-            Let's Build Something Amazing Together
+          <h2 className="mb-6 text-balance font-display text-3xl font-extrabold leading-[1.06] tracking-[-0.04em] text-foreground sm:text-4xl md:text-6xl">
+            Let&rsquo;s scope it on <span className="text-primary">one call.</span>
           </h2>
 
-          <p className="mb-10 text-lg text-muted-foreground leading-relaxed md:text-xl">
-            Join hundreds of companies already building the future with BoltBit Consulting.
-            Get started today and experience the power of AI-driven development.
+          <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-muted-foreground">
+            Thirty minutes. You&rsquo;ll leave with a number and a date, whether or not
+            you end up working with us.
           </p>
 
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button
               size="lg"
-              className="group bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8"
+              className="group w-full bg-primary px-8 text-base font-semibold text-primary-foreground hover:bg-primary/90 sm:w-auto"
               asChild
             >
               <a href="#contact">
-                Start Your Project
+                Book a call
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-border bg-transparent text-foreground hover:bg-secondary text-base px-8"
+              className="w-full border-border bg-transparent px-8 text-base font-semibold text-foreground hover:bg-secondary hover:text-foreground sm:w-auto"
               asChild
             >
-              <a href="#contact">
-                Schedule a Call
-              </a>
+              <a href="mailto:hello@sillstack.com">Email us instead</a>
             </Button>
           </div>
+
+          <p className="mt-8 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-muted-foreground">
+            If it&rsquo;s not a fit, we&rsquo;ll say so on that call
+          </p>
         </div>
       </div>
     </section>

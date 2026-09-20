@@ -1,279 +1,91 @@
 ---
-title: "7 Software Development Mistakes That Cost Companies Millions"
-description: "Learn from the expensive mistakes we've seen companies make repeatedly. Avoid these common software development pitfalls that waste time, money, and opportunity."
+title: "Seven Ways Software Projects Go Wrong"
+description: "The failure patterns that turn a three-month project into a fourteen-month one, what each one costs, and the cheap check that catches it early."
 date: "2024-11-15"
-author: ""
-tags: ["Software Development", "Best Practices", "Project Management", "Lessons Learned"]
+author: "SillStack"
+tags: ["Risk", "Software Development", "Project Management", "Procurement"]
 category: "Business & Strategy"
-readTime: "6 min read"
+readTime: "9 min read"
 featured: false
+services: ["product-discovery", "web-applications"]
+practices: ["product-strategy", "product-engineering"]
+seoTitle: "Why Projects Go Wrong"
 ---
 
-We've rescued 30+ failed software projects. The patterns are depressingly similar.
+Software projects rarely fail suddenly. They fail slowly, in a way everybody can see and nobody quite names, and by the time the conversation happens the expensive decisions are eighteen months old.
 
-Here are the 7 mistakes that consistently destroy software projects—and how to avoid them.
+These are the seven patterns we see most. None is exotic. Each has a cheap check that catches it early, which is the only part that matters, because all of them are nearly free to fix in week one and brutal to fix in month six.
 
-## Mistake #1: Building for Imaginary Users
+## 1. Building what was asked for instead of what is needed
 
-**The Problem:**
-"Our users need advanced reporting with 50+ customizable widgets!"
+Somebody describes a feature. It gets built exactly as described. It does not get used.
 
-No, they don't. You think they do.
+The gap is almost always that the request was a *solution* and nobody went back to the *problem*. "We need a dashboard with configurable widgets" is a solution. The problem underneath it might be that one person cannot answer one question on a Monday morning, and a single report would have done it.
 
-**Real Example:**
-SaaS company spent $200K building a sophisticated analytics dashboard with 47 different chart types. Usage: 3% of users, twice per month on average.
+This produces the most expensive artefact in business software: the elaborate reporting module nobody opens. Ask afterwards what people actually wanted and a surprising share of the answer is some version of "let me export it so I can look at it in a spreadsheet".
 
-They surveyed users after launch: "We just want to export to Excel and analyze there."
+**The check:** for every significant feature, write down what somebody will do differently because it exists. If there is no answer, you have found a feature to cut. The Standish Group's much-cited study of delivered software put the share of features that are rarely or never used at around two-thirds; your product is probably not the exception.
 
-**The Fix:**
-- Talk to 10+ target users *before* building anything
-- Show mockups, not descriptions
-- Watch them use competitors' products
-- Ask: "Would you pay for this specific feature?"
+## 2. Nobody can make a decision
 
-**Truth:** 70% of features requested pre-launch are never used post-launch.
+The most common cause of delay on a software project is not engineering. It is waiting.
 
-## Mistake #2: Death by Meetings
+An engineer hits an ambiguity in week two — what should happen when the approver is also the requester? — and asks. The question goes to a project manager, who takes it to a steering group, which meets fortnightly. Three weeks pass. Meanwhile the engineer has either guessed or moved to other work and lost context.
 
-**The Problem:**
-Daily standups. Weekly planning. Bi-weekly demos. Monthly reviews. Quarterly strategy.
+Multiply that by the twenty ambiguities in any real build and you have your overrun, without anybody having written a single line of bad code.
 
-Result: Developers spend 15-20 hours per week in meetings. That's $40K-$50K/month in lost development time for a 5-person team.
+**The check:** name one person who can decide without convening anybody, and give them the authority in writing. If no such person exists, that is the finding, and it is worth knowing before you start rather than in month three.
 
-**Real Example:**
-Enterprise project with 3 teams, 15 people total. Average: 18 hours of meetings per person per week.
+## 3. Architecting for a scale you will never see
 
-Development velocity: 2-3 features per month.
+Microservices with no users. An orchestration layer for a service that gets forty requests an hour. Multi-region replication before a single region has been stressed.
 
-After cutting meetings by 70%: 8-10 features per month.
+Every one of those choices is defensible in isolation and together they produce a system that costs several times more to build and considerably more to change, because every alteration has to be made in five places instead of one.
 
-**The Fix:**
-- Async by default. Meetings only when truly necessary.
-- No meeting longer than 25 minutes.
-- No meetings with >5 people.
-- Replace status meetings with written updates.
-- Developers control their calendar.
+The cruel part is the second-order cost. Complexity slows you down exactly when you most need to move, which is the first year, when you are still finding out whether anyone wants the thing.
 
-**Rule:** If it can be a Slack message, it shouldn't be a meeting.
+**The check:** ask what load the design assumes, then ask what load you have. If those numbers are two orders of magnitude apart, you are paying for a problem you do not have. Build for the scale you can see, and re-architect when the numbers force you to. That moment is a good problem to have and most products never reach it.
 
-## Mistake #3: Premature Optimization
+## 4. Scope that grows one reasonable request at a time
 
-**The Problem:**
-"We need to handle 100 million users from day one."
+Nobody adds thirty features on purpose. They add one, eleven times, and each one is individually sensible and agreed in a meeting where saying no would have been awkward.
 
-You have zero users.
+A storefront scoped as cart, checkout and admin arrives at launch with wishlists, reviews, loyalty points, subscriptions, gift cards and multi-currency. The launch is a year late, the budget has roughly tripled, and the most common piece of customer feedback is that it has become hard to buy something.
 
-**Real Example:**
-Startup spent 6 months building microservices architecture, Kubernetes deployment, multi-region database replication, CDN optimization, advanced caching.
+**The check:** a written out-of-scope list, agreed at the start, and a rule that every addition is re-quoted in writing with its effect on the date before work begins. Not to stop changes — you will need some — but to make their cost visible at the moment of asking rather than at the end.
 
-Launch day users: 47.
+## 5. Technical debt treated as a personality flaw
 
-Month 6 users: 1,200.
+"We will clean it up later" is not a lie. It is a genuine intention that collides with a deadline every single sprint.
 
-Could have built everything on a $20/month server.
+What it looks like from the business side is odd: year one is fast, year two is slower and nobody can say why, and by year three the estimate for a small change is a week and the team is not exaggerating. Eventually somebody proposes a rewrite, which is the most expensive project a business can undertake and has the worst completion rate of any kind of software work.
 
-**The Fix:**
-- Build for 1,000 users.
-- When you hit 10,000, refactor.
-- When you hit 100,000, architect for scale.
-- Premature optimization wastes months and money.
+**The check:** ask how long a one-line change takes to reach production, end to end. That number is your debt level, expressed honestly. If it is measured in days, you have a problem that is still cheap.
 
-**Truth:** 90% of startups never have scale problems. They die before getting there.
+## 6. The word "simple"
 
-## Mistake #4: Feature Creep
+A business asks for a "simple intake form". Engineering hears a form that adapts to the answers and builds a multi-step wizard with conditional logic and validation. The business meant one page, six fields and a submit button.
 
-**The Problem:**
-MVP starts with 5 features. By launch, it has 37.
+Nobody was careless. "Simple" carried completely different meanings on each side of the conversation and neither side had any reason to suspect it.
 
-Result: 12-month timeline, $400K budget, confused users, slow product.
+Every project has a few of these words. *Real-time. Reporting. Integration. User.* They all sound unambiguous and none of them are.
 
-**Real Example:**
-E-commerce platform planned for 3-month MVP:
-- Original scope: Shopping cart, checkout, admin panel
-- Final scope at "launch": Shopping cart, checkout, admin, wishlists, reviews, Q&A, recommendations, social sharing, gift cards, loyalty points, subscription, multi-currency, inventory forecasting
+**The check:** a mockup in the first week, however rough. Not a description of the screen, the screen. Five minutes of looking at a picture resolves misunderstandings that survive an hour of talking.
 
-Timeline: 14 months. Budget: $380K.
+## 7. Choosing technology for the wrong reason
 
-Users complained: "It's too complicated. I just want to buy things."
+A stack gets picked because it is interesting, or because a big company uses it, or because it will read well when raising money. Those are all real motivations and none of them is about your project.
 
-**The Fix:**
-- Define 5 core features. That's it.
-- Everything else goes in a "v2" list.
-- Launch with 5 features.
-- Add features based on actual user feedback.
+The consequences arrive later: a small hiring pool, thin library support, documentation gaps, and a maintenance burden that lands on whoever inherits the system. The clever choice is enjoyable for the people who made it and expensive for everybody after them.
 
-**Rule:** Every feature added delays launch by 1-2 weeks. Choose wisely.
+**The check:** ask which requirement forced the choice. A good answer names a constraint — this has to work offline, this has to handle this throughput, the team already knows this. A bad answer describes a preference. More on this in [why your agency's tech stack should not be yours by default](/blog/why-tech-stack-flexibility-matters).
 
-## Mistake #5: Technical Debt Ignorance
+## What these have in common
 
-**The Problem:**
-"We'll clean it up later." (You won't.)
+Six of the seven are decided before anyone writes code, and all seven are cheap to catch in week one.
 
-**The Technical Debt Spiral:**
-1. Cut corners to ship faster
-2. Code becomes messy
-3. New features take longer
-4. Cut more corners to catch up
-5. Code becomes unmaintainable
-6. Every change breaks something
-7. Complete rewrite needed
-
-**Real Cost:**
-- Year 1: Fast development
-- Year 2: Development slows 30%
-- Year 3: Development slows 60%
-- Year 4: Rewrite costs $500K
-
-**The Fix:**
-- Allocate 20% of time to code quality
-- Refactor as you go
-- Write tests (yes, really)
-- Pay debt before it compounds
-
-**Truth:** "Move fast and break things" works until it doesn't. Then you're stuck with a mess.
-
-## Mistake #6: Communication Breakdown
-
-**The Problem:**
-Developers, designers, and business stakeholders speak different languages.
-
-**How It Manifests:**
-- "That's not what I asked for" (after 3 months of development)
-- "I thought you meant X" (when they clearly said Y)
-- "This doesn't solve our problem" (at launch)
-
-**Real Example:**
-Healthcare app project:
-- Business wanted: "Simple patient intake form"
-- Developers built: "Complex multi-step wizard with conditional logic and validation"
-- Business meant: "One page, 6 fields, submit button"
-
-Wasted: $45K, 6 weeks.
-
-**The Fix:**
-- Show mockups before writing code
-- Demo progress weekly
-- Document decisions in writing
-- Use screenshots/videos, not just words
-- Involve all stakeholders early
-
-**Rule:** If you haven't shown a prototype, you're building blind.
-
-## Mistake #7: Wrong Technology Choices
-
-**The Problem:**
-Choosing tech based on hype, not requirements.
-
-**Bad Reasons to Choose Technology:**
-- "It's the latest trend"
-- "I want to learn it"
-- "My friend uses it"
-- "Big company X uses it" (they have different problems)
-- "It sounds impressive to investors"
-
-**Real Example:**
-Startup chose:
-- Microservices (0 users, no need)
-- GraphQL (REST would work fine)
-- Kubernetes (Heroku would work)
-- MongoDB (data is clearly relational)
-
-Result: 3x longer development, hard to hire developers, complexity nightmare.
-
-After 18 months, rewrote everything with boring tech: Next.js + PostgreSQL + Vercel.
-
-New velocity: 3x faster development.
-
-**The Fix:**
-- Choose boring, proven technology
-- Match tech to your team's skills
-- Optimize for development speed, not resume padding
-- You can always refactor later (if you survive)
-
-**Truth:** The best technology is the one your team knows and can ship with quickly.
-
-## The Pattern: Same Mistakes, Different Companies
-
-Here's the tragic part: Every company thinks they're different. They're not.
-
-We've seen Series A startups make the same mistakes as Fortune 500 enterprises:
-- Overthinking
-- Over-engineering
-- Over-meeting
-- Under-listening
-
-The successful ones share traits:
-- Ship fast
-- Listen to users
-- Iterate quickly
-- Keep it simple
-- Focus on value
-
-## How to Avoid These Mistakes
-
-### Week 1: Validation
-- [ ] Talk to 10+ target users
-- [ ] Show mockups, get feedback
-- [ ] Validate they'll pay
-
-### Week 2-4: Build Minimum
-- [ ] 5 core features only
-- [ ] Boring, proven tech stack
-- [ ] No optimization for scale
-- [ ] Weekly demos
-
-### Week 5-6: Ship and Learn
-- [ ] Launch to first users
-- [ ] Daily user feedback
-- [ ] Fix critical issues only
-- [ ] Measure everything
-
-### Week 7+: Iterate
-- [ ] Add features users actually want
-- [ ] Remove features nobody uses
-- [ ] Refactor worst code
-- [ ] Grow deliberately
-
-## Questions to Ask Before Every Project
-
-**Before Writing Code:**
-1. "Have we talked to 10+ users about this?"
-2. "What's the one problem we're solving?"
-3. "What's the minimum we can build to test this?"
-4. "Can we ship this in 4-6 weeks?"
-5. "What can we cut?"
-
-**During Development:**
-1. "Are we still building what users need?"
-2. "Could this feature wait?"
-3. "Is this code maintainable?"
-4. "Are we meeting too much?"
-5. "When do we demo progress?"
-
-**Before Launch:**
-1. "Does this solve the core problem?"
-2. "Is it simple enough?"
-3. "Have real users tested it?"
-4. "What's our first metric?"
-5. "When do we iterate?"
-
-## Conclusion
-
-Most failed projects don't fail due to lack of talent or effort. They fail due to:
-1. Building the wrong thing
-2. Taking too long
-3. Making it too complex
-
-The antidote is simple:
-- Build less
-- Ship faster
-- Listen more
-- Iterate constantly
-
-Your product doesn't need to be perfect. It needs to solve a real problem for real people and be good enough that they'll pay for it.
-
-Everything else is details.
+That is the whole argument for spending a week on scope before building anything. Not as process for its own sake. Because a week of uncomfortable questions at the start is the only intervention that reliably beats six months of expensive discovery at the end.
 
 ---
 
-**Worried your project is heading off track?** [Get in touch](/#contact) for a free project audit and honest feedback.
+**Recognise any of these?** [Tell us which ones](/contact) and we'll give you an honest read on how expensive it is likely to get.

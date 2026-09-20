@@ -1,141 +1,120 @@
-"use client";
+import { ArrowRight, ArrowUpRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { SERVICE_GROUPS, SERVICES } from "@/lib/services"
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-
-const services = [
-  {
-    title: "Web Applications",
-    description:
-      "Full-stack web apps built with modern frameworks and AI-powered features.",
-    features: [
-      "React & Next.js",
-      "Real-time Features",
-      "API Integration",
-      "Responsive Design",
-    ],
-    link: "/services/web-applications",
-  },
-  {
-    title: "Mobile Solutions",
-    description:
-      "Native and cross-platform mobile apps that deliver exceptional user experiences.",
-    features: [
-      "iOS & Android",
-      "Cross-Platform",
-      "Push Notifications",
-      "Offline Support",
-    ],
-    link: "/services/mobile-solutions",
-  },
-  {
-    title: "AI Integration",
-    description:
-      "Embed intelligent features into your existing products with cutting-edge AI.",
-    features: [
-      "ChatGPT Integration",
-      "Computer Vision",
-      "Natural Language",
-      "Predictive Analytics",
-    ],
-    link: "/services/ai-integration",
-  },
-];
-
+/**
+ * Home page teaser, not a catalogue.
+ *
+ * This used to render all twelve service cards, which made the home page the
+ * menu and left /services with nothing to add. A home page should make the
+ * argument and hand off; the full list and the practice areas behind each
+ * service live one click away.
+ *
+ * Price is absent from this rail, from the nav and from the service pages
+ * themselves. A published band anchors every later negotiation and caps it at
+ * the same time — to a buyer with a large budget it reads as "too small". The
+ * figure belongs in a quote written against a signed scope, which is the only
+ * point at which it means anything.
+ *
+ * Layout is asymmetric — prose left, the five groups as a compact rail right —
+ * so it does not read like the same block as the two sections after it.
+ */
 export function Services() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section
-      id="services"
-      ref={ref}
-      className="relative py-16 md:py-24 bg-secondary/30 overflow-hidden"
-    >
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] md:h-[600px] md:w-[600px] rounded-full bg-foreground/10 md:bg-foreground/20 blur-2xl md:blur-3xl animate-glow-pulse"
-        style={{ animationDelay: "0.5s" }}
-      />
+    <section id="services" className="bd bd-spot border-t border-border py-20 md:py-28">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid gap-14 lg:grid-cols-[1fr_0.85fr] lg:gap-20">
+          {/* ── the argument ── */}
+          <div>
+            <p className="mb-5 inline-flex rounded-md bg-accent px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent-foreground">
+              Services
+            </p>
+            <h2 className="mb-6 text-balance font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.038em] text-foreground md:text-5xl">
+              Whatever it is, it starts with a written scope.
+            </h2>
 
-      <div className="container mx-auto px-4 md:px-6 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="mb-4 text-2xl sm:text-3xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
-            Our Services
-          </h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            Custom-built solutions designed specifically for your business
-            challenges
-          </p>
-        </motion.div>
+            <p className="mb-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              There are {SERVICES.length} of them, grouped by how you buy them
+              rather than by technology. Most are a fixed price quoted against a
+              specification you sign in week one. Two are monthly retainers. One
+              is the short engagement that tells you which of the others you
+              actually need.
+            </p>
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -4, scale: 1.01 }}
-            >
-              <Card className="group h-full border-border bg-card p-6 md:p-8 transition-all hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10">
-                <h3 className="mb-3 text-xl md:text-2xl font-bold text-card-foreground">
-                  {service.title}
-                </h3>
-                <p className="mb-6 text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
-                <ul className="mb-6 space-y-2">
-                  {service.features.map((feature, idx) => (
-                    <motion.li
-                      key={feature}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={
-                        isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
-                      }
-                      transition={{
-                        duration: 0.4,
-                        delay: index * 0.1 + idx * 0.05,
-                      }}
-                      className="flex items-center gap-2 text-sm text-muted-foreground"
+            <p className="mb-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              Most engagements combine two or three of them &mdash; a build with an
+              integration behind it, or a migration with a support retainer
+              after. You get one scope, one schedule, one number and one point
+              of contact, rather than three vendors and a coordination problem.
+            </p>
+
+            <p className="mb-9 max-w-xl text-lg leading-relaxed text-muted-foreground">
+              Every service has a page of its own: what it covers, the practice
+              areas behind it, and what we have built with it before. Pricing is
+              quoted against a written scope rather than published as a band,
+              because a number before a specification is a guess.
+            </p>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Button
+                className="bg-primary font-semibold text-primary-foreground hover:bg-primary/90"
+                asChild
+              >
+                <a href="/services">
+                  Explore all services
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+              <Button
+                variant="outline"
+                className="border-border bg-transparent font-semibold text-foreground hover:bg-secondary hover:text-foreground"
+                asChild
+              >
+                <a href="/services/product-discovery">Not sure which one?</a>
+              </Button>
+            </div>
+          </div>
+
+          {/* ── the rail ── */}
+          <div className="lg:pt-4">
+            <p className="mb-4 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-muted-foreground">
+              Grouped by how you buy
+            </p>
+            <ul className="overflow-hidden rounded-xl border border-border">
+              {SERVICE_GROUPS.map((g, i) => (
+                  <li key={g.name} className={i > 0 ? "border-t border-border" : ""}>
+                    <a
+                      href="/services"
+                      className="group flex items-center justify-between gap-4 bg-background px-5 py-4 transition-colors hover:bg-secondary/50"
                     >
-                      <motion.div
-                        className="h-1.5 w-1.5 rounded-full bg-primary"
-                        whileHover={{ scale: 1.5 }}
-                        transition={{ type: "spring", stiffness: 400 }}
-                      />
-                      {feature}
-                    </motion.li>
-                  ))}
-                </ul>
-                <motion.div
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <Button
-                    variant="ghost"
-                    className="group/btn text-primary hover:text-primary hover:bg-primary/10"
-                    asChild
-                  >
-                    <a href={service.link}>
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                      <div className="min-w-0">
+                        <p className="flex items-center gap-1.5 font-display text-[0.98rem] font-bold tracking-[-0.015em] text-foreground">
+                          {g.name}
+                          <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100" />
+                        </p>
+                        <p className="mt-0.5 truncate font-mono text-[0.6rem] uppercase tracking-[0.12em] text-muted-foreground">
+                          {g.billing}
+                        </p>
+                      </div>
+                      <div className="shrink-0 text-right">
+                        <p className="font-display text-lg font-extrabold tracking-[-0.03em] text-primary">
+                          {g.slugs.length}
+                        </p>
+                        <p className="mt-0.5 font-mono text-[0.58rem] uppercase tracking-[0.12em] text-muted-foreground">
+                          {g.slugs.length === 1 ? "service" : "services"}
+                        </p>
+                      </div>
                     </a>
-                  </Button>
-                </motion.div>
-              </Card>
-            </motion.div>
-          ))}
+                  </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-[0.85rem] leading-relaxed text-muted-foreground">
+              We quote a fixed number against a written scope, not from a rate
+              card. Each service page says what that scope usually looks like.
+            </p>
+          </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -1,263 +1,95 @@
 ---
-title: "Why Your Development Agency's Tech Stack Shouldn't Be Your Tech Stack"
-description: "Most agencies force you into their preferred technologies. Learn why tech stack flexibility is crucial for your project's success and long-term viability."
-date: "2024-11-13"
-author: ""
-tags: ["Tech Stack", "Software Architecture", "Business Strategy", "Vendor Lock-in"]
-category: "Business & Strategy"
-readTime: "7 min read"
+title: "Why Your Agency's Tech Stack Shouldn't Be Yours by Default"
+description: "Every firm has a preferred stack and most of the reasons are honest. How to tell when the preference is serving your project and when it is serving theirs."
+date: "2024-11-08"
+author: "SillStack"
+tags: ["Architecture", "Procurement", "Technology Choice", "Due Diligence"]
+category: "Engineering"
+readTime: "8 min read"
 featured: false
+services: ["product-discovery", "legacy-modernisation"]
+practices: ["product-engineering", "platform-engineering"]
+seoTitle: "Whose Tech Stack Is It"
 ---
 
-"We only build with Ruby on Rails."
-"Our team specializes in Angular."
-"We're a .NET shop."
+Every development firm has a stack it prefers, including this one. That is not a scandal and a firm that claims otherwise is either inexperienced or not being straight with you.
 
-Run. Fast.
+The question worth asking is narrower: **is the preference being applied to your project, or is your project being applied to the preference?**
 
-When an agency leads with their tech stack instead of your business needs, you're about to pay for their limitations—not their expertise.
+Those look identical in a proposal. They diverge sharply in month four.
 
-Here's why tech stack flexibility should be your #1 criterion when choosing a development partner.
+## The honest reasons a firm has a default
 
-## The Tech Stack Trap
+Worth stating plainly, because the cynical read is not usually the right one.
 
-### How Most Agencies Work
-1. Client describes their product idea
-2. Agency says: "Great! We'll build it with [their favorite stack]"
-3. Client trusts them (they're the experts, right?)
-4. Project launches
-5. 18 months later, client needs features that don't fit the chosen stack
-6. Refactoring costs 2-3x the original build
-7. Client is stuck
+A team that has shipped forty projects in one stack is genuinely faster and genuinely safer in it than in something they learned last month. They know its failure modes. They have the deployment pipeline, the monitoring, the libraries they trust, the pattern for the thing that always turns out to be harder than expected.
 
-### The Real Cost of Inflexibility
+Reuse compounds that. A firm with a maintained platform — authentication, permissions, billing, notifications, audit logging — starts your project at the part that is specific to you. That is real value and it is most of why a short delivery window is possible at all. Ours is written up in [the Sill case study](/work/sill-platform), and we will tell you plainly that it is a TypeScript platform, because that constrains what we are good for.
 
-**Case Study: E-Commerce Platform**
-- **Chosen Stack:** Ruby on Rails (agency's preference)
-- **Business Need:** Real-time inventory across 50+ retail locations
-- **Problem:** Rails struggles with real-time WebSocket connections at scale
-- **Solution:**  Add Node.js microservice for real-time features
-- **Cost:** $80K to add what should have been built-in
-- **Time Lost:** 4 months
+So a default is not a red flag. A default that never bends is.
 
-**Better Approach:**
-- **Right Stack from Day One:** Node.js with Next.js frontend
-- **Total Cost:** $50K
-- **Real-time features:** Built-in, not bolted-on
-- **Result:** Launches 3 months earlier, saves $30K
+## Where it goes wrong
 
-## Why Agencies Push Their Preferred Stack
+The failure has a consistent shape.
 
-Let's be honest about the incentives:
+A requirement exists that the chosen stack handles awkwardly. Real-time inventory across dozens of sites, say, or heavy scheduled processing, or something with hard offline requirements. It gets worked around rather than designed for. A second runtime appears alongside the first to handle the part the original could not. Now there are two deployment pipelines, two dependency sets, and an integration between them that was never in anybody's plan.
 
-### 1. **Existing Team Skills**
-Agencies hire for specific technologies. Teaching new stacks is expensive. Easier to fit your project into their existing team than hire new developers.
+None of that is visible when you sign. It arrives in month four as a change request, priced as new work, and described as something that could not have been foreseen.
 
-### 2. **Reusable Code**
-They've built authentication systems, admin panels, and payment processing in their stack. Starting fresh means building from scratch.
+It could have been. The awkwardness was predictable from the requirements, and the requirements existed before the stack was chosen.
 
-### 3. **Comfort Zone**
-Developers prefer familiar tools. Risk is lower when you stick to what you know.
+## The four questions that expose it
 
-**None of these reasons benefit you.**
+**Which requirement forced this choice?**
 
-## When One-Stack Shops Work
+The single most useful question in the whole selection. A good answer names a constraint: this has to work with no signal, this has to handle this volume, the compliance regime restricts the options, your team already runs this. A weak answer describes a property of the technology — it is modern, it is fast, it scales — without connecting it to anything about you.
 
-To be fair, specialized agencies make sense in specific scenarios:
+**What would have made you choose differently?**
 
-### You Need Them When:
-- You're hiring for ongoing development (in-house team already uses that stack)
-- You're adding features to existing application in that tech
-- Your compliance/security requires specific technology (e.g., certain government contracts)
-- You have internal expertise in that technology
+A firm with real judgement can answer this immediately and specifically. "If you needed native platform features on day one we would not use React Native." "If this had to run on your own hardware in a factory we would not put it on serverless." A firm that cannot name a case where its default is wrong has not thought about it as a decision.
 
-### Example: You Already Use React
-If your in-house team maintains a React app and you're adding features, hiring a React-specialized agency makes sense. They'll match your patterns and your team can maintain their work.
+**Who can maintain this after you?**
 
-## The BoltBit Consulting Approach: Technology Agnostic
+The question people regret not asking. How many developers within reach of your business know this stack? What does hiring for it look like? If the answer involves a niche framework and a small community, you have bought a dependency on this specific firm, whether or not anybody intended that.
 
-We've delivered projects in 20+ tech stacks. Here's why:
+**What happens if we want to leave in two years?**
 
-### Our Process
-1. **Understand Your Business:** What are you building? Who for? What's the business model?
-2. **Assess Your Team:** Do you have in-house developers? What do they know?
-3. **Consider Your Infrastructure:** What systems exist? What integrates easily?
-4. **Evaluate Scale Requirements:** 100 users or 100,000?
-5. **Account for Timeline & Budget:** Some stacks are faster/cheaper for certain projects
-6. **Then** we recommend the right stack
+Ownership of the code is table stakes. The real answer is about whether the code is *transferable*: standard frameworks, conventional structure, documented, without a proprietary layer in the middle that only they understand.
 
-### Real Example: Healthcare Platform
+## The proprietary framework problem
 
-**Client:** Mental health startup
-**Requirement:** HIPAA-compliant telehealth platform
+Some firms build their work on an internal framework they wrote and do not publish.
 
-**Their Initial Request:** "Build it with React and Firebase"
-**Our Analysis:**
-- Firebase isn't HIPAA-compliant out of box (requires Business Associate Agreement)
-- Video calls need HIPAA-compliant infrastructure
-- Patient data needs encrypted at rest and in transit
+There is a legitimate version. A maintained platform of well-separated components on top of standard technology, which you could in principle carry on without them. A shared foundation is how a small team ships more than its size suggests, and the honest test is whether the underlying code is conventional and whether you could hire somebody to work on it from the open market.
 
-**Our Recommendation:**
-- Frontend: Next.js (their team knew React, so easy fit)
-- Backend: Node.js on AWS with HIPAA-eligible services
-- Database: PostgreSQL on AWS RDS (encrypted)
-- Video: Twilio (HIPAA-compliant)
-- File Storage: AWS S3 with encryption
+The other version is a custom framework that replaces the standard one. Your application is written against their abstractions rather than against anything a new developer would recognise. Leaving means a rewrite. Some firms are explicit about this and price accordingly. Others are not.
 
-**Why It Worked:**
-- Meets HIPAA requirements
-- Leverages client's React knowledge
-- Scales with AWS infrastructure
-- Integrates with existing practice management software (via APIs)
+Ask directly: if we took this code to another firm tomorrow, what would they need to learn that is not publicly documented? The answer, and how comfortable the firm is giving it, tells you most of what you need.
 
-**Cost:** $75K
-**If Built with Their Original Stack:** Would fail HIPAA audit, require $150K rebuild
+## When the constraint really does decide
 
-## Common Tech Stack Mistakes
+There is a version of this where the firm's preference is irrelevant because the requirements have already narrowed the field.
 
-### Mistake #1: "Let's Use the Latest Trendy Framework"
-**Red Flag:** Agency suggests Svelte/SolidJS/[insert new framework] for enterprise project
+Take a product handling protected health information. A team arrives having decided on a particular backend-as-a-service, and it is a reasonable choice on its own terms — fast, well documented, it would work. What decides it is not preference. It is that the platform has to be covered by a business associate agreement, that the video layer has to be too, and that encryption at rest has to be demonstrable to an auditor rather than assumed. That reduces the options to a specific list before anyone writes a line of code.
 
-**Why It's Wrong:** Cutting-edge means:
-- Smaller talent pool for hiring
-- Fewer libraries and tools
-- Documentation gaps
-- Unknown long-term viability
+What usually survives from the original request is more than clients expect. If the team knows React, the front end stays React. What changes is underneath, and it changes because of a compliance requirement rather than taste.
 
-**Right Approach:** Use proven, boring technology with 5+ years of production use.
+That is the pattern to look for in any recommendation you are handed: can the firm point at the requirement that forced it?
 
-### Mistake #2: "Microservices from Day One"
-**Red Flag:** Agency architects 15 microservices for your MVP
+## Boring is usually correct
 
-**Why It's Wrong:**
-- Massive complexity for small teams
-- Slower development
-- Higher hosting costs
-- Debugging nightmares
+One bias worth holding, and it cuts against the interesting answer.
 
-**Right Approach:** Start with monolith, split into services when you have actual scale problems.
+Widely-used, well-supported technology with a large hiring pool beats elegant technology almost every time for business software. Not because the elegant option is worse at the thing it does. Because your system will be maintained for years by people who are not in the room now, and every unusual choice is a tax on all of them.
 
-### Mistake #3: "We'll Build a Custom Framework"
-**Red Flag:** "Our proprietary framework is better than [established option]"
+The exciting choice is enjoyable for the firm that makes it and expensive for whoever inherits it. That trade is fine when you are the one who will inherit it. It is not fine when somebody else is making it on your behalf.
 
-**Why It's Wrong:**
-- Vendor lock-in (you can never leave them)
-- No community support
-- Your team can't maintain it
-- Usually not actually better
+## What good looks like
 
-**Right Approach:** Use open-source, well-maintained frameworks.
+A firm that tells you what it is good at and what it is not. That names the constraint behind each recommendation. That can describe a project it turned down because the requirements pointed somewhere else. That gives you the code in a form somebody else could pick up.
 
-### Mistake #4: "NoSQL for Everything"
-**Red Flag:** MongoDB for clearly relational data
-
-**Why It's Wrong:**
-- Most business data is relational (users, orders, products)
-- You lose ACID guarantees
-- Query complexity explodes
-- Data integrity issues
-
-**Right Approach:** PostgreSQL for structured data (90% of business apps), add NoSQL only when you have document storage needs.
-
-## How to Evaluate an Agency's Tech Stack Flexibility
-
-Ask these questions:
-
-### 1. "Why are you recommending this stack?"
-**Good Answer:** Detailed explanation tied to your specific needs, team, and scale requirements.
-**Bad Answer:** "It's what we know" or "It's the best."
-
-### 2. "What other stacks did you consider?"
-**Good Answer:** Lists 2-3 alternatives with pros/cons specific to your project.
-**Bad Answer:** "We didn't consider others."
-
-### 3. "Does your team have experience with [your current tech]?"
-**Good Answer:** "Yes, we've built [specific examples]" or "We can staff developers with that experience."
-**Bad Answer:** "We recommend switching to [our stack]."
-
-### 4. "Can we hire developers to maintain this after launch?"
-**Good Answer:** Points to large talent pool, active community, and job market data.
-**Bad Answer:** "You'll need to keep working with us."
-
-### 5. "What's your plan if we need to scale 100x?"
-**Good Answer:** Specific architectural decisions made with scale in mind, clear migration path if needed.
-**Bad Answer:** "We'll rebuild it when that happens."
-
-## The Right Stack for Different Projects
-
-### E-Commerce
-**Good Choices:**
-- Next.js + Node.js + PostgreSQL
-- Shopify (if you don't need heavy customization)
-- Laravel + Vue (if team knows PHP)
-
-**Why:** Fast page loads (SEO), easy payment integrations, well-tested cart/checkout flows
-
-### SaaS Dashboards
-**Good Choices:**
-- Next.js + tRPC + PostgreSQL
-- Ruby on Rails (for rapid CRUD development)
-- Django + React
-
-**Why:** Rapid development, excellent admin interfaces, easy authentication
-
-### Real-Time Applications
-**Good Choices:**
-- Node.js + WebSockets
-- Elixir/Phoenix (if scale is massive)
-- Go + WebSockets
-
-**Why:** Optimized for concurrent connections, low latency
-
-### Mobile Apps
-**Good Choices:**
-- React Native (if you have React web app)
-- Flutter (if you need custom UI)
-- Native (if you need maximum performance)
-
-**Why:** Depends on your web tech, design requirements, and performance needs
-
-## Red Flags: When to Walk Away
-
-### 1. "Our stack is perfect for every project"
-No stack is perfect for everything. This shows lack of nuance.
-
-### 2. "You have to sign a maintenance contract with us"
-Vendor lock-in. Your code should be maintainable by any competent developer.
-
-### 3. "We need to use our proprietary tools"
-Lock-in plus risk. What happens if they go out of business?
-
-### 4. "Everyone's moving to [brand new technology]"
-Bleeding edge = bleeding wallet. Stick to proven tech.
-
-### 5. "We can't integrate with your existing systems"
-Either they're inflexible or your systems need replacement (get a second opinion).
-
-## The Future: AI Levels the Playing Field
-
-Here's the ironic part: AI development tools are making tech stack choice less important.
-
-**Why?**
-- AI can write code in any language
-- Context switching costs drop to near zero
-- Learning new frameworks takes hours, not months
-- Code generation abstracts language differences
-
-By 2026-2027, "we only work in X" will sound as outdated as "we only use Internet Explorer."
-
-## Conclusion
-
-Your development agency should be a strategic partner, not a one-trick pony. Tech stack flexibility isn't about knowing every framework—it's about:
-
-1. Putting your business needs first
-2. Considering your existing team and infrastructure
-3. Choosing technology based on project requirements
-4. Avoiding vendor lock-in
-5. Ensuring long-term maintainability
-
-The right technology is the one that solves your specific problem at your specific scale with your specific team—not the one your agency happens to know.
+We are a TypeScript shop with a platform underneath, and that is exactly why we are the wrong firm for some projects. If you need a different architecture, a different language, or a hosting arrangement we do not run, you would be paying us to learn on your money — and we would rather say that on the first call than discover it together in month three.
 
 ---
 
-**Want honest advice about your tech stack?** [Get in touch](/#contact) and we'll analyze your needs—no strings attached, no sales pitch.
+**Being sold a stack you are unsure about?** [Tell us what you are running today](/contact) and what you are being offered. We'll give you a straight read on both.

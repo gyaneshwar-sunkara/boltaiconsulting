@@ -5,81 +5,101 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Light Mode Colors */
-  --background: oklch(1 0 0); /* Pure white */
-  --foreground: oklch(0.145 0 0); /* Near black */
-  --card: oklch(1 0 0); /* White cards */
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0); /* White */
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0); /* Black */
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* ── SillStack · light (default) ───────────────────────────────
+     Ember is the only saturated colour. One use per screen.        */
+  --background:             #FFFFFF;
+  --foreground:             #12141A;  /* Graphite */
+  --card:                   #FFFFFF;
+  --card-foreground:        #12141A;
+  --popover:                #FFFFFF;
+  --popover-foreground:     #12141A;
+
+  /* Ember buttons take GRAPHITE text, not white.
+     White on ember = 3.26:1 (fails AA). Graphite = 5.65:1 (passes). */
+  --primary:                #F0612B;  /* Ember */
+  --primary-foreground:     #12141A;  /* Graphite */
+
+  --secondary:              #FBFBFC;  /* Paper */
+  --secondary-foreground:   #2A2E36;  /* Slate */
+  --muted:                  #FBFBFC;
+  --muted-foreground:       #767A85;  /* Concrete — lightest grey allowed on white */
+  --accent:                 #FEF3EE;  /* Ember 50 */
+  --accent-foreground:      #B23F17;  /* Ember 700 — AA on white at 5.81:1 */
+
+  --destructive:            #D93A3A;
+  --destructive-foreground: #FFFFFF;
+
+  --border:                 #E8E9EC;  /* Cloud */
+  --input:                  #E8E9EC;
+  --ring:                   #F0612B;
+
+  --chart-1: #F0612B;
+  --chart-2: #0E7C5A;
+  --chart-3: #1F6FEB;
+  --chart-4: #C77700;
+  --chart-5: #767A85;
+
+  --radius: 0.5rem;
+
+  --sidebar:                    #FBFBFC;
+  --sidebar-foreground:         #12141A;
+  --sidebar-primary:            #F0612B;
+  --sidebar-primary-foreground: #12141A;
+  --sidebar-accent:             #FEF3EE;
+  --sidebar-accent-foreground:  #B23F17;
+  --sidebar-border:             #E8E9EC;
+  --sidebar-ring:               #F0612B;
 }
 
 .dark {
-  /* Dark Mode Colors */
-  --background: oklch(0.145 0 0); /* Near black */
-  --foreground: oklch(0.985 0 0); /* Near white */
-  --card: oklch(0.145 0 0); /* Keep cards white for contrast */
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0); /* White */
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0); /* Black */
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* ── SillStack · dark (default) ────────────────────────────────
+     Deeper ground and stronger separation than a tinted grey. The
+     site alternates dark and light bands, so this has to hold its
+     own as a full-page ground rather than a mode.                  */
+  --background:             #08090C;
+  --foreground:             #F4F5F7;
+  --card:                   #101217;
+  --card-foreground:        #F4F5F7;
+  --popover:                #101217;
+  --popover-foreground:     #F4F5F7;
+
+  --primary:                #FF6B33;
+  --primary-foreground:     #08090C;
+
+  --secondary:              #14171D;
+  --secondary-foreground:   #F4F5F7;
+  --muted:                  #14171D;
+  --muted-foreground:       #939AA6;
+  --accent:                 #2B1408;
+  --accent-foreground:      #FF9466;
+
+  --destructive:            #E05A5A;
+  --destructive-foreground: #08090C;
+
+  --border:                 #1E222A;
+  --input:                  #1E222A;
+  --ring:                   #FF6B33;
+
+  --chart-1: #FF6B33;
+  --chart-2: #4FC39C;
+  --chart-3: #7BA7FF;
+  --chart-4: #E0A857;
+  --chart-5: #939AA6;
+
+  --sidebar:                    #101217;
+  --sidebar-foreground:         #F4F5F7;
+  --sidebar-primary:            #FF6B33;
+  --sidebar-primary-foreground: #08090C;
+  --sidebar-accent:             #2B1408;
+  --sidebar-accent-foreground:  #FF9466;
+  --sidebar-border:             #1E222A;
+  --sidebar-ring:               #FF6B33;
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-schibsted);
+  --font-mono: var(--font-jetbrains);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -160,10 +180,10 @@
 @keyframes glow {
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(100, 150, 255, 0.3);
+    box-shadow: 0 0 20px rgb(240 97 43 / 0.28);
   }
   50% {
-    box-shadow: 0 0 40px rgba(100, 150, 255, 0.5);
+    box-shadow: 0 0 40px rgb(240 97 43 / 0.45);
   }
 }
 
@@ -247,4 +267,245 @@
       animation: none;
     }
   }
+}
+
+
+/* ── Entrance animations, CSS-driven ────────────────────────────────
+   Deliberately NOT JavaScript. Framer Motion ships elements with an
+   inline `opacity: 0` that only lifts once React hydrates, which means
+   crawlers and users without JS see a blank page. These run off CSS,
+   so the content is visible the moment the stylesheet parses.        */
+@keyframes ss-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.ss-rise {
+  animation: ss-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-rise { animation: none; }
+}
+
+
+/* ── Marquee ────────────────────────────────────────────────────────
+   CSS-only infinite scroll. The track holds two identical copies of
+   the list and translates exactly -50%, so the loop is seamless.      */
+@keyframes ss-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Duration is a variable because the row sets it: a longer row has a wider
+   track, and a fixed duration would make it scroll proportionally faster. */
+.ss-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ss-marquee var(--ss-marquee-duration, 42s) linear infinite;
+}
+
+/* Same keyframes, played backwards, so the second row travels the other way. */
+.ss-marquee-track[data-direction="reverse"] { animation-direction: reverse; }
+
+.ss-marquee:hover .ss-marquee-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-marquee-track { animation: none; }
+}
+
+/* Fade the edges so items enter and leave instead of being chopped off. */
+.ss-marquee {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+
+/* ── Alternate band ─────────────────────────────────────────────────
+   The page alternates surface weight as you scroll, so sections don't
+   all read identically. The band shifts *relative to the current
+   theme* rather than being an absolute light panel:
+
+     light theme  →  drops to a soft grey, cards stay white on top
+     dark theme   →  lifts to a raised charcoal, never to white
+
+   An earlier version hardcoded white here, which meant scrolling a
+   dark page hit a full-brightness panel every other section. Same
+   rhythm, but relative, so the eye stays adapted to one exposure.
+
+   Cards are deliberately one step further from the band than they are
+   from the base surface, so the depth order survives in both themes. */
+.band-alt {
+  --background:          #F4F5F8;
+  --foreground:          #0C0E12;
+  --card:                #FFFFFF;
+  --card-foreground:     #0C0E12;
+  --popover:             #FFFFFF;
+  --popover-foreground:  #0C0E12;
+  --secondary:           #E9EBEF;
+  --secondary-foreground:#22262E;
+  --muted:               #E9EBEF;
+  --muted-foreground:    #5F6670;
+  --accent:              #FFEDE4;
+  --accent-foreground:   #B23F17;
+  --primary:             #E8541F;
+  --primary-foreground:  #FFFFFF;
+  --border:              #DBDEE4;
+  --input:               #DBDEE4;
+  --ring:                #E8541F;
+}
+
+.dark .band-alt {
+  --background:          #0E1116;
+  --foreground:          #F4F5F7;
+  --card:                #171B22;
+  --card-foreground:     #F4F5F7;
+  --popover:             #171B22;
+  --popover-foreground:  #F4F5F7;
+  --secondary:           #1C212A;
+  --secondary-foreground:#F4F5F7;
+  --muted:               #1C212A;
+  --muted-foreground:    #9BA2AE;
+  --accent:              #331709;
+  --accent-foreground:   #FF9466;
+  --primary:             #FF6B33;
+  --primary-foreground:  #08090C;
+  --border:              #272D37;
+  --input:               #272D37;
+  --ring:                #FF6B33;
+}
+
+.band-alt {
+  position: relative;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* A seam at each band edge, so the surface change reads as a deliberate
+   boundary rather than a shade that drifted. Brand colour at low opacity
+   works in both themes where a grey hairline only works in one. */
+.band-alt::before,
+.band-alt::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 1px;
+  pointer-events: none;
+  opacity: 0.3;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary) 28%,
+    var(--primary) 72%,
+    transparent
+  );
+}
+.band-alt::before { top: 0; }
+.band-alt::after  { bottom: 0; }
+
+
+/* ── Scroll reveal, CSS-native ──────────────────────────────────────
+   Uses `animation-timeline: view()` where the browser supports it, so
+   sections fade up as they enter without a line of JavaScript. Where
+   it isn't supported the element is simply visible — which is the
+   correct fallback, and the opposite of what a JS library gives you. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .ss-reveal {
+      animation: ss-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+
+/* ── Section backdrops ──────────────────────────────────────────────
+   Third attempt, and the one that works. The first was invisible (the
+   line colour was tied to --color-border, which on this ground is
+   #1E222A on #08090C). The second was visible and dated — 45° hatching
+   and repeating vertical rules read as a 2015 hero.
+
+   What is left is what actually makes a dark page feel considered:
+   grain everywhere so large near-black areas stop banding, and three
+   quiet light treatments for depth.
+
+   Every light source here is NEUTRAL. No orange radial anywhere on the
+   site — the brand colour appears on type, borders and buttons only.   */
+:root {
+  --bd-line:  rgb(18 20 26 / 0.07);
+  --bd-lift:  rgb(18 20 26 / 0.085);
+  --bd-grain: 0.05;
+}
+.dark {
+  --bd-line:  rgb(255 255 255 / 0.05);
+  --bd-lift:  rgb(255 255 255 / 0.075);
+  --bd-grain: 0.035;
+}
+
+.bd { position: relative; isolation: isolate; }
+
+/* The decorative layer is absolutely positioned; forcing it relative here
+   would collapse it, so it is excluded. */
+.bd > *:not([aria-hidden="true"]) { position: relative; z-index: 1; }
+
+.bd::before,
+.bd::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Grain, on every backdrop. The single biggest thing separating a flat
+   dark page from one that looks finished — it breaks up large areas of
+   near-black that otherwise band on ordinary displays. */
+.bd::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: var(--bd-grain);
+  mix-blend-mode: overlay;
+}
+
+/* Square grid. The home hero, and deliberately nowhere else. */
+.bd-grid::before {
+  background-image:
+    linear-gradient(to right, var(--bd-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bd-line) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 30% 0%, #000 60%, transparent 100%);
+          mask-image: radial-gradient(ellipse 70% 60% at 30% 0%, #000 60%, transparent 100%);
+}
+
+/* Fine dot field. Capabilities, industries, the blog. */
+.bd-dots::before {
+  background-image: radial-gradient(var(--bd-line) 1.2px, transparent 1.2px);
+  background-size: 1.4rem 1.4rem;
+  -webkit-mask-image: radial-gradient(ellipse 100% 90% at 50% 0%, #000 35%, transparent 95%);
+          mask-image: radial-gradient(ellipse 100% 90% at 50% 0%, #000 35%, transparent 95%);
+}
+
+/* A wide, soft neutral light from the top edge. Reads as depth rather
+   than as a lamp, which is what the orange blur got wrong. */
+.bd-spot::before {
+  background-image:
+    radial-gradient(ellipse 120% 70% at 50% -20%, var(--bd-lift) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 60% at 88% -12%, var(--bd-lift) 0%, transparent 62%);
+}
+
+/* Two offset neutral pools. Same idea, asymmetric, for sections that sit
+   next to a spot so the pair does not repeat. */
+.bd-mesh::before {
+  background-image:
+    radial-gradient(ellipse 60% 80% at 12% 0%, var(--bd-lift) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 70% at 88% 100%, var(--bd-lift) 0%, transparent 62%);
+}
+
+/* A single hairline across the top, brightest in the middle. Used where a
+   section needs a seam rather than a field. */
+.bd-seam::before {
+  background-image: linear-gradient(
+    to right, transparent, var(--bd-line) 25%, var(--bd-line) 75%, transparent);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
 }

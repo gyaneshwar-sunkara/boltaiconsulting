@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
-import { Mail, Phone, Clock, Send } from "lucide-react"
+import { Mail, Phone, Clock, MapPin, Send } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 interface ContactFormInlineProps {
@@ -17,7 +17,7 @@ interface ContactFormInlineProps {
 export function ContactFormInline({
   showHeader = false,
   customTitle = "Let's Work Together",
-  customDescription = "Ready to start your project? Get in touch and let's discuss how we can help."
+  customDescription = "Describe the problem in your own words. We'll come back within one business day."
 }: ContactFormInlineProps) {
   const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -40,21 +40,23 @@ export function ContactFormInline({
 
       if (response.ok) {
         toast({
-          title: "Message sent!",
-          description: "We'll get back to you within 24 hours.",
+          title: "Message sent",
+          description: "An engineer will come back to you within one business day.",
         })
         form.reset()
       } else {
         toast({
-          title: "Error",
-          description: "Something went wrong. Please try again.",
+          title: "That did not send",
+          description:
+            "Please try again, or email hello@sillstack.com directly and we will pick it up there.",
           variant: "destructive",
         })
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try emailing us directly.",
+        title: "That did not send",
+        description:
+          "The form could not reach us. Email hello@sillstack.com and it will get to the same place.",
         variant: "destructive",
       })
     } finally {
@@ -66,7 +68,7 @@ export function ContactFormInline({
     <div>
       {showHeader && (
         <div className="text-center mb-12">
-          <h2 className="mb-4 text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+          <h2 className="mb-4 text-3xl md:text-4xl font-display font-extrabold tracking-[-0.035em] text-foreground">
             {customTitle}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -77,9 +79,6 @@ export function ContactFormInline({
 
       <div className="grid gap-8 lg:grid-cols-2 max-w-6xl mx-auto">
         <Card className="p-6 md:p-8 border-border bg-card h-full">
-          <h3 className="mb-6 text-xl md:text-2xl font-bold text-card-foreground">
-            Send us a message
-          </h3>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label
@@ -173,14 +172,14 @@ export function ContactFormInline({
               <Mail className="h-6 w-6" />
             </div>
             <div>
-              <h4 className="mb-1 font-semibold text-card-foreground">
+              <h3 className="mb-1 font-semibold text-card-foreground">
                 Email
-              </h4>
+              </h3>
               <a
-                href="mailto:contact@boltbitconsulting.com"
+                href="mailto:hello@sillstack.com"
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                contact@boltbitconsulting.com
+                hello@sillstack.com
               </a>
             </div>
           </div>
@@ -192,9 +191,9 @@ export function ContactFormInline({
               <Phone className="h-6 w-6" />
             </div>
             <div>
-              <h4 className="mb-1 font-semibold text-card-foreground">
+              <h3 className="mb-1 font-semibold text-card-foreground">
                 Phone
-              </h4>
+              </h3>
               <a
                 href="tel:+14077962376"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -211,32 +210,48 @@ export function ContactFormInline({
               <Clock className="h-6 w-6" />
             </div>
             <div>
-              <h4 className="mb-1 font-semibold text-card-foreground">
-                Response Time
-              </h4>
+              <h3 className="mb-1 font-semibold text-card-foreground">
+                Reply time
+              </h3>
               <p className="text-muted-foreground">
-                We typically respond within 24 hours
+                One business day, from an engineer
+              </p>
+            </div>
+          </div>
+        </Card>
+
+        <Card className="p-6 border-border bg-card">
+          <div className="flex items-start gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+              <MapPin className="h-6 w-6" />
+            </div>
+            <div>
+              <h3 className="mb-1 font-semibold text-card-foreground">
+                Based in
+              </h3>
+              <p className="text-muted-foreground">
+                Orlando, Florida &middot; serving the United States
               </p>
             </div>
           </div>
         </Card>
 
         <Card className="p-6 border-border bg-card bg-gradient-to-br from-primary/5 to-transparent">
-          <h4 className="mb-3 text-lg font-semibold text-card-foreground">
-            What happens next?
-          </h4>
+          <h3 className="mb-3 text-lg font-semibold text-card-foreground">
+            What happens next
+          </h3>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <div className="mt-1 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
-              We'll review your project details
+              A reply within one business day, from an engineer
             </li>
             <li className="flex items-start gap-2">
               <div className="mt-1 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
-              Schedule a free consultation call
+              A thirty-minute call, with no qualifying call before it
             </li>
             <li className="flex items-start gap-2">
               <div className="mt-1 h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0" />
-              Receive a detailed proposal within 48 hours
+              A written scope and a fixed number, if it fits
             </li>
           </ul>
         </Card>
