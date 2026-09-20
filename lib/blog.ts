@@ -16,6 +16,14 @@ export interface BlogPost {
   category: string
   readTime: string
   featured: boolean
+  /** Shorter <title> where the headline runs past ~50 chars. Falls back to title. */
+  seoTitle?: string
+  /** Shorter meta description where the card blurb runs past ~160. */
+  seoDescription?: string
+  /** Service slugs this post supports. Drives "related reading" both ways. */
+  services: string[]
+  /** Practice-area slugs this post supports. */
+  practices: string[]
   content: string
 }
 
@@ -29,6 +37,10 @@ export interface BlogPostMetadata {
   category: string
   readTime: string
   featured: boolean
+  seoTitle?: string
+  seoDescription?: string
+  services: string[]
+  practices: string[]
 }
 
 export function getAllPosts(): BlogPostMetadata[] {
@@ -51,6 +63,10 @@ export function getAllPosts(): BlogPostMetadata[] {
         category: data.category,
         readTime: data.readTime,
         featured: data.featured || false,
+        seoTitle: data.seoTitle || undefined,
+        seoDescription: data.seoDescription || undefined,
+        services: data.services || [],
+        practices: data.practices || [],
       }
     })
 
@@ -84,6 +100,10 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
       category: data.category,
       readTime: data.readTime,
       featured: data.featured || false,
+      seoTitle: data.seoTitle || undefined,
+      seoDescription: data.seoDescription || undefined,
+      services: data.services || [],
+      practices: data.practices || [],
       content: contentHtml,
     }
   } catch (error) {
@@ -116,4 +136,20 @@ export function getAllTags(): string[] {
   const allPosts = getAllPosts()
   const tags = allPosts.flatMap((post) => post.tags)
   return Array.from(new Set(tags))
+}
+
+/**
+ * Posts that support a given service or practice area.
+ *
+ * The link is declared once, in each post's frontmatter, and read from both
+ * directions: the service and practice pages list their related reading, and
+ * each post points back at what it is evidence for. Same pattern as the
+ * service/practice registries — one declaration, no chance of drift.
+ */
+export function postsForService(slug: string, limit = 3): BlogPostMetadata[] {
+  return getAllPosts().filter((p) => p.services.includes(slug)).slice(0, limit)
+}
+
+export function postsForPractice(slug: string, limit = 3): BlogPostMetadata[] {
+  return getAllPosts().filter((p) => p.practices.includes(slug)).slice(0, limit)
 }

@@ -1,226 +1,127 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { useTheme } from "@/components/theme-provider";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
-interface Particle {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  size: number;
-  opacity: number;
-}
+const PROOF = [
+  ["4 weeks", "Average delivery"],
+  ["Fixed price", "No surprise invoices"],
+  ["Every Friday", "Working software"],
+];
 
+/**
+ * Asymmetric and left-weighted rather than centred.
+ *
+ * A centred hero over generous whitespace is the default every SaaS template
+ * ships with. This one runs the headline hard to the left at display scale and
+ * hangs a metadata rail off the right, so the page opens with an edge instead
+ * of a symmetrical block.
+ */
 export function Hero() {
-  const { theme } = useTheme();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const particlesRef = useRef<Particle[]>([]);
-  const animationFrameRef = useRef<number | undefined>(undefined);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    if (particlesRef.current.length === 0) {
-      particlesRef.current = Array.from({ length: 50 }, (_) => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 1.5 + 0.5,
-        opacity: Math.random() * 0.15 + 0.05,
-      }));
-    }
-
-    const animate = () => {
-      ctx.fillStyle =
-        theme === "dark" ? "rgba(0, 0, 0, 0.05)" : "rgba(255, 255, 255, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      const particleColor = theme === "dark" ? "255, 255, 255" : "0, 0, 0";
-
-      particlesRef.current.forEach((particle) => {
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-
-        if (particle.x <= 0 || particle.x >= canvas.width) {
-          particle.vx *= -1;
-          particle.x = Math.max(0, Math.min(canvas.width, particle.x));
-        }
-        if (particle.y <= 0 || particle.y >= canvas.height) {
-          particle.vy *= -1;
-          particle.y = Math.max(0, Math.min(canvas.height, particle.y));
-        }
-
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = `rgba(${particleColor}, ${particle.opacity * 0.5})`;
-
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${particleColor}, ${particle.opacity})`;
-        ctx.fill();
-
-        ctx.shadowBlur = 0;
-      });
-
-      animationFrameRef.current = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener("resize", resizeCanvas);
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [theme]);
-
   return (
-    <section className="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-32">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30 [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] z-0" />
+    <section className="relative overflow-hidden border-b border-border pt-32 pb-0 md:pt-40">
+      {/* The one ember glow on the site, kept because the home hero is the
+          one place it reads as a brand moment rather than as decoration
+          repeated behind every section. */}
+      <div className="pointer-events-none absolute -left-40 -top-40 z-0 h-[640px] w-[860px] rounded-full bg-primary/15 blur-[130px]" aria-hidden="true" />
 
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full z-0" />
+      {/* structural grid */}
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:5rem_5rem] opacity-70 [mask-image:radial-gradient(ellipse_80%_70%_at_20%_0%,#000_40%,transparent_100%)]" />
 
-      <div
-        className="hidden md:block absolute top-1/4 left-1/4 h-[450px] w-[450px] rounded-full bg-foreground/35 blur-3xl animate-glow-pulse z-0"
-        style={{ animationDelay: "0s" }}
-      />
-      <div
-        className="hidden md:block absolute bottom-1/4 right-1/4 h-[450px] w-[450px] rounded-full bg-foreground/40 blur-3xl animate-glow-pulse z-0"
-        style={{ animationDelay: "1s" }}
-      />
-      <div
-        className="hidden md:block absolute top-1/2 right-1/3 h-80 w-80 rounded-full bg-foreground/35 blur-3xl animate-glow-pulse z-0"
-        style={{ animationDelay: "2s" }}
-      />
+      <div className="container relative z-10 mx-auto px-6 md:px-6">
+        <div className="grid gap-12 lg:grid-cols-[1.45fr_1fr] lg:gap-16">
+          {/* headline column */}
+          <div className="pb-16 md:pb-24">
+            <p className="ss-rise mb-8 inline-flex items-center gap-2.5 rounded-full border border-border bg-card/60 py-1.5 pl-2 pr-4 backdrop-blur">
+              <span className="rounded-full bg-primary px-2 py-0.5 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-primary-foreground">
+                New
+              </span>
+              <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted-foreground">
+                GEO — get named by ChatGPT
+              </span>
+            </p>
 
-      <div className="container relative mx-auto px-6 md:px-6 z-10">
-        <div className="mx-auto max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            whileHover={{ scale: 1.02 }}
-            className="mb-8 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm text-primary"
-          >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 4,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "linear",
-                delay: 0.5,
-              }}
+            <h1
+              className="ss-rise mb-8 text-balance font-display text-[2.75rem] font-extrabold leading-[0.98] tracking-[-0.045em] text-foreground sm:text-6xl lg:text-[4.6rem]"
+              style={{ animationDelay: "0.06s" }}
             >
-              <Sparkles className="h-4 w-4" />
-            </motion.div>
-            <span>What takes weeks, we deliver in days, at a fraction of the cost.</span>
-          </motion.div>
+              Ship your software in{" "}
+              <span className="relative whitespace-nowrap text-primary">
+                weeks,
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 300 12"
+                  preserveAspectRatio="none"
+                  className="absolute -bottom-1 left-0 h-[0.14em] w-full text-primary/45"
+                >
+                  <rect width="300" height="12" rx="6" fill="currentColor" />
+                </svg>
+              </span>{" "}
+              not quarters.
+            </h1>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
-            className="mb-8 sm:mb-6 text-4xl sm:text-5xl font-bold leading-tight tracking-tight text-foreground md:text-7xl text-balance"
-          >
-            <span className="block">Tech Solutions at</span>
-            <motion.span
-              className="relative font-bold block will-change-transform"
-              style={{ backfaceVisibility: "hidden", perspective: 1000 }}
+            <p
+              className="ss-rise mb-10 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl"
+              style={{ animationDelay: "0.12s" }}
             >
-              AI Speed
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-foreground/30 to-transparent pointer-events-none"
-                animate={{
-                  x: ["-120%", "220%"],
-                  opacity: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeOut",
-                  delay: 0.8,
-                }}
-                style={{ willChange: "transform, opacity" }}
-              />
-            </motion.span>
-          </motion.h1>
+              A software consulting studio in Orlando. Fixed scope, fixed price,
+              and most engagements live in four weeks — because we build on a
+              platform we already own.
+            </p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2, ease: "easeOut" }}
-            className="mb-12 sm:mb-10 text-lg text-muted-foreground md:text-xl leading-relaxed text-balance px-4 sm:px-0"
-          >
-            We craft custom software solutions tailored to your unique business
-            needs. No off-the-shelf products - just fast, affordable, and
-            intelligent solutions built with cutting-edge AI.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
-            className="flex flex-col items-center justify-center gap-6 sm:gap-4 sm:flex-row px-4 sm:px-0"
-          >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto"
+            <div
+              className="ss-rise flex flex-col gap-3 sm:flex-row"
+              style={{ animationDelay: "0.18s" }}
             >
               <Button
                 size="lg"
-                className="group bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 w-full sm:w-auto"
+                className="group bg-primary px-8 text-base font-semibold text-primary-foreground transition-transform hover:bg-primary/90 hover:scale-[1.02]"
                 asChild
               >
                 <a href="#contact">
-                  Start Building
-                  <motion.div
-                    className="ml-2 inline-block"
-                    animate={{ x: [0, 3, 0] }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Number.POSITIVE_INFINITY,
-                      delay: 1,
-                    }}
-                  >
-                    <ArrowRight className="h-4 w-4" />
-                  </motion.div>
+                  Start a project
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto"
-            >
               <Button
                 size="lg"
                 variant="outline"
-                className="border-border bg-transparent text-foreground hover:bg-secondary text-base px-8 w-full sm:w-auto"
+                className="border-border bg-transparent px-8 text-base font-semibold text-foreground hover:bg-secondary"
                 asChild
               >
-                <a href="#contact">
-                  View Our Work
-                </a>
+                <a href="/#engagements">How engagements work</a>
               </Button>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
+
+          {/* metadata rail — hangs off the right, full-bleed to the bottom edge */}
+          <aside className="relative flex flex-col justify-end border-border lg:border-l lg:pl-12">
+            <div className="grid gap-px overflow-hidden border-t border-border bg-border lg:border-t-0">
+              {PROOF.map(([value, label]) => (
+                <div key={label} className="bg-background px-1 py-6 lg:px-0">
+                  <p className="font-display text-3xl font-extrabold tracking-[-0.035em] text-foreground lg:text-4xl">
+                    {value}
+                  </p>
+                  <p className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-muted-foreground">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="/work/eshop-pos-ecommerce"
+              className="group mb-12 mt-8 flex items-start justify-between gap-4 rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/60"
+            >
+              <div>
+                <p className="mb-1.5 font-mono text-[0.6rem] uppercase tracking-[0.16em] text-accent-foreground">
+                  Latest work
+                </p>
+                <p className="font-display text-base font-bold leading-snug tracking-[-0.018em] text-card-foreground">
+                  POS-connected ordering, four locations
+                </p>
+              </div>
+              <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </aside>
         </div>
       </div>
     </section>

@@ -1,206 +1,87 @@
 ---
-title: "How AI Reduces Software Development Costs by 70%"
-description: "Discover how AI-powered development tools are revolutionizing the software industry by cutting costs by 70% while maintaining quality. Learn the strategies top companies use."
+title: "What AI Actually Changes About the Cost of Building Software"
+description: "AI is a real lever on development cost, but not the one most vendors claim. Here is which parts of a build it moves, which it does not, and why."
 date: "2024-11-20"
-author: ""
-tags: ["AI Development", "Cost Reduction", "Software Engineering", "Business Strategy"]
+author: "SillStack"
+tags: ["AI Development", "Cost", "Estimation", "Engineering Practice"]
 category: "AI & Development"
 readTime: "8 min read"
 featured: true
+services: ["ai-integration", "product-discovery"]
+practices: ["ai-automation", "product-engineering"]
+seoTitle: "AI and Development Costs"
 ---
 
-The software development landscape has fundamentally changed. What once cost $100,000 and took 6 months can now be delivered for $30,000 in just 6 weeks. The catalyst? Artificial Intelligence.
+Every firm selling software development currently claims AI has made it dramatically cheaper. Very few of them will tell you which line of the estimate moved.
 
-But this isn't about replacing developers with AI. It's about augmenting human expertise with intelligent tools that eliminate repetitive work, catch errors before they become expensive, and accelerate every phase of the development lifecycle.
+We use AI tooling daily and it has genuinely changed how we work. It has not changed the cost of a project by the multiples the marketing suggests. The reason is worth understanding before you price your next build, because the places it helps least are the places most of your money goes.
 
-## The Traditional Development Cost Problem
+## Where the money in a project actually goes
 
-Before we dive into how AI solves the cost problem, let's understand why software development has been so expensive:
+Take a typical business application: a few user roles, a workflow, some reporting, an integration with something you already run. Broadly, the effort splits four ways.
 
-### 1. **Repetitive Boilerplate Code**
-Developers spend 30-40% of their time writing repetitive code: CRUD operations, API endpoints, form validation, authentication flows. This work is necessary but doesn't differentiate your product.
+**Deciding what to build.** Watching how the work happens today, finding the edge cases nobody mentions in a meeting, and writing down what the software will and will not do. On a well-run project this is a meaningful share of the total, and it is almost entirely conversation.
 
-### 2. **Manual Testing and Debugging**
-Testing accounts for 25-35% of total development time. Manual QA, regression testing, and bug hunting are time-intensive and error-prone.
+**Plumbing.** Accounts, roles and permissions, billing, notifications, an admin screen, audit logs, background jobs, deployment, monitoring. None of it is specific to your business and all of it has to exist.
 
-### 3. **Context Switching and Communication Overhead**
-Developers lose 2-3 hours daily to meetings, Slack messages, and documentation. Every context switch costs 15-20 minutes of focus time.
+**The part that is yours.** The workflow, the rules, the data model that matches how you actually operate. This is the work you are really paying for.
 
-### 4. **Technical Debt and Refactoring**
-Poor initial decisions lead to technical debt. Refactoring legacy code can consume 20-30% of development resources.
+**Everything after the first release.** Bugs, the change you asked for in week six, the integration whose vendor altered it, the incident at 2am.
 
-## How AI Cuts Development Costs
+Ask which of those four AI compresses and the honest answer is: some of the third, a little of the fourth, and almost none of the first two.
 
-### 1. **AI-Powered Code Generation** (30-40% Time Savings)
+## What AI genuinely does well
 
-Modern AI coding assistants like GitHub Copilot, Cursor, and Claude Code don't just autocomplete—they understand context and generate entire functions, components, and modules.
+**Writing code you have described precisely.** Once a decision is made (this endpoint, these fields, this validation) a competent engineer with good tooling produces it faster than they did three years ago. That is real, and it compounds across a project.
 
-**Real Example:**
-Creating a user authentication system traditionally takes 40-50 hours:
-- Database schema design: 4 hours
-- Backend API endpoints: 12 hours
-- Frontend forms and validation: 10 hours
-- Security implementation: 8 hours
-- Testing: 10 hours
-- Documentation: 4 hours
+**Tests.** AI is good at generating cases around a function you have written, including some you would not have thought of. It is much less good at knowing which behaviours are worth asserting in the first place, which is the part that determines whether [a test suite earns its keep](/blog/the-test-suite-that-earns-its-keep).
 
-With AI assistance, the same system takes 15-20 hours:
-- AI generates boilerplate with best practices built-in
-- Security patterns are automatically applied
-- Tests are generated alongside code
-- Documentation is created in real-time
+**Reading unfamiliar code.** Handed a legacy system with no documentation, an engineer gets oriented considerably faster than by reading it line by line. On modernisation work this is the biggest practical gain we see.
 
-**Cost Impact:** $4,000-$5,000 → $1,500-$2,000
+**Documentation and the first draft of anything.** Release notes, API docs, migration plans. A first draft in thirty seconds that needs ten minutes of correction still beats a blank page.
 
-### 2. **Automated Testing and Quality Assurance** (25-35% Time Savings)
+## What it does not do
 
-AI doesn't just write code—it writes tests. Modern AI tools can:
-- Generate unit tests with edge cases you hadn't considered
-- Create integration tests based on your API structure
-- Identify potential bugs before deployment
-- Perform automated code reviews
+**It does not know what you meant.** The expensive failures in software are not typing failures. They are a rule that was described one way in a meeting and works another way in practice, discovered in month three. AI will implement the wrong thing quickly and confidently.
 
-**Real Example:**
-A SaaS dashboard with 50 features would traditionally require:
-- 120 hours of manual testing
-- 40 hours writing test scripts
-- 20 hours regression testing after each update
+**It does not make architectural decisions you can live with.** Whether stock is a count or a ledger, whether the point of sale owns the catalogue, whether an integration needs to be idempotent. Those are cheap to get right at the start and very expensive to reverse later. They come from having got them wrong before.
 
-With AI-powered testing:
-- Tests are generated automatically as features are built
-- Regression testing runs in CI/CD pipeline
-- Bug detection happens during development, not post-deployment
+**It does not remove the review.** Generated code still has to be read by someone accountable for it. Where it is not, the time saved writing reappears later as time spent debugging, usually at a worse moment.
 
-**Cost Impact:** $16,000 → $4,000
+**It does not shorten a decision you have not made.** The most common cause of delay on a project is waiting for an answer. No model helps with that.
 
-### 3. **Intelligent Code Review and Bug Detection** (15-20% Cost Reduction)
+## The lever that actually moves the number
 
-AI code reviewers analyze every commit for:
-- Security vulnerabilities
-- Performance bottlenecks
-- Code smell and anti-patterns
-- Accessibility issues
-- Best practice violations
+If you want a project to cost meaningfully less, the useful question is not which tools the team uses. It is how much of what you are paying for already exists.
 
-This catches expensive bugs early. A security vulnerability found in production costs $10,000-$50,000 to fix (emergency patches, customer communication, reputation damage). The same bug caught during development costs $500.
+Accounts, permissions, billing, notifications, admin, audit logging, multi-tenancy and background jobs appear on the estimate for every project, and they are near-identical from one business to the next. A firm that rebuilds them each time is charging you to solve a problem it solved last quarter. A firm that maintains them as a platform starts your project at the part that is actually yours.
 
-### 4. **Rapid Prototyping and MVP Development** (50-60% Faster Time-to-Market)
+That is the arithmetic behind our four-week quote, and it has nothing to do with AI. We set it out in [why we quote four weeks](/blog/why-we-quote-four-weeks), and what the platform actually contains is written up in [the Sill case study](/work/sill-platform).
 
-AI accelerates the most expensive phase: initial MVP development.
+AI sits on top of that as a real but second-order effect. It makes the remaining work faster. It doesn't make the remaining work unnecessary.
 
-**Traditional MVP Timeline:**
-- Week 1-2: Requirements and architecture
-- Week 3-8: Core feature development
-- Week 9-12: Testing and refinement
-- Week 13-16: Deployment and polish
+## How to read a vendor's AI claim
 
-**AI-Accelerated Timeline:**
-- Week 1: Requirements (AI helps document and clarify)
-- Week 2-4: Core feature development (AI handles boilerplate)
-- Week 5-6: Testing and deployment (AI-generated tests)
+If a proposal leans on AI to justify its price or its timeline, three questions separate the substantive from the decorative.
 
-**Cost Impact:** $80,000 over 4 months → $25,000 over 6 weeks
+**Which phase got shorter?** A specific answer, such as "we spend less time on boilerplate and test scaffolding", is checkable. "AI makes us faster across the board" is not a claim about anything.
 
-## Real-World Case Study: E-Commerce Platform
+**Who reviews what the model produces, and when?** If the answer is vague, you are being sold the speed without the check that makes the speed safe.
 
-**Client:** Mid-sized retail company
-**Project:** Custom e-commerce platform with inventory management
+**What happens to the estimate if the tooling disappeared tomorrow?** A firm that can answer has an engineering practice with AI in it. A firm that cannot has a pricing story.
 
-### Traditional Approach (Estimated):
-- **Timeline:** 8 months
-- **Team:** 4 developers, 1 QA, 1 PM
-- **Cost:** $320,000
-- **Breakdown:**
-  - Backend development: $120,000
-  - Frontend development: $100,000
-  - Testing & QA: $50,000
-  - Project management: $50,000
+## Where we use it, plainly
 
-### AI-Augmented Approach (Actual):
-- **Timeline:** 10 weeks
-- **Team:** 2 senior developers + AI tools
-- **Cost:** $85,000
-- **Breakdown:**
-  - AI-assisted full-stack development: $60,000
-  - Automated testing & deployment: $10,000
-  - Project management: $15,000
+We use AI assistants for code generation, test scaffolding, orienting in unfamiliar codebases and first-draft documentation. We build it into products where it does a job the user can verify: receipt extraction with confidence scoring and a review path for anything uncertain, described in [the Larder case study](/work/larder).
 
-### **Result: 73% cost reduction, 75% faster delivery**
+We do not use it to make architectural decisions, to decide what to build, or to skip review. And we do not price work on the assumption that it saves a fixed percentage, because across the projects we have run it does not save a consistent one.
 
-## The AI Development Stack We Use
+## The short version
 
-At BoltBit Consulting, we've built our workflow around these tools:
+AI has made competent engineers meaningfully more productive at the parts of the job that were already mechanical. That is worth having. It is not worth a headline percentage, and a firm quoting you one has picked a number.
 
-### **Code Generation**
-- GitHub Copilot: Real-time code suggestions
-- Claude Code: Complex feature implementation
-- Cursor: AI-native code editor
-
-### **Testing & QA**
-- Automated test generation with Copilot
-- AI-powered code review (SonarCloud + custom AI)
-- Continuous testing in CI/CD pipeline
-
-### **DevOps & Deployment**
-- AI-optimized Docker configurations
-- Automated deployment pipelines
-- Intelligent monitoring and error detection
-
-### **Documentation**
-- Auto-generated API documentation
-- AI-written user guides
-- Inline code documentation during development
-
-## What AI Can't Replace (Yet)
-
-Let's be clear: AI doesn't eliminate the need for skilled developers. It amplifies them.
-
-AI struggles with:
-- **Complex architectural decisions**: Choosing the right tech stack for your specific needs
-- **Business logic**: Understanding your unique requirements and edge cases
-- **User experience**: Crafting intuitive interfaces that users love
-- **Strategic thinking**: Prioritizing features based on business impact
-
-This is why the AI-augmented approach works: senior developers focus on these high-value activities while AI handles the repetitive work.
-
-## How to Get Started with AI-Powered Development
-
-### 1. **Start with Low-Risk Projects**
-Use AI tools on internal tools or MVPs first. Learn what works before applying it to mission-critical systems.
-
-### 2. **Train Your Team**
-AI tools are powerful but require skill to use effectively. Invest in training your developers to prompt AI effectively and review AI-generated code critically.
-
-### 3. **Establish Quality Gates**
-AI-generated code should pass the same review standards as human-written code:
-- Automated testing
-- Code review by senior developers
-- Security scanning
-- Performance testing
-
-### 4. **Measure and Iterate**
-Track metrics:
-- Time saved per feature
-- Bug detection rates
-- Cost per feature
-- Developer satisfaction
-
-## The Future: Even Lower Costs
-
-AI development tools are improving exponentially. What we're seeing now is just the beginning:
-
-- **2025:** AI handles 50-60% of coding work
-- **2026-2027:** AI manages entire microservices
-- **2028+:** AI architects entire systems with minimal human guidance
-
-The cost savings will only increase. Companies that adopt AI development now will have a 3-5 year competitive advantage over those who wait.
-
-## Conclusion: AI as Your Competitive Advantage
-
-Reducing development costs by 70% isn't about cutting corners—it's about working smarter. AI allows small teams to compete with large enterprises, startups to iterate faster, and established companies to innovate without breaking the bank.
-
-The question isn't whether to use AI in your development process. It's how quickly you can adopt it before your competitors do.
+The larger saving available to you is not paying twice for the plumbing, and that one you can verify. Ask what the firm already has running before your project starts.
 
 ---
 
-**Ready to reduce your development costs?** [Get in touch](/#contact) and we'll show you how AI can transform your next project.
+**Want an honest estimate?** [Tell us what you are trying to build](/contact) and we will come back with a scope, a price and a date.

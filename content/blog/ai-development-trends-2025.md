@@ -1,287 +1,95 @@
 ---
 title: "AI Development Trends in 2025: What's Actually Working"
-description: "Cut through the AI hype. Discover which AI development trends are delivering real ROI in 2025 and which ones are just buzzwords."
+description: "Six things AI is genuinely good at inside production software, two that are still demos, and the test that separates them before you commit a budget."
 date: "2024-11-17"
-author: ""
-tags: ["AI", "Trends", "Software Development", "Machine Learning", "Future"]
+author: "SillStack"
+tags: ["AI", "Trends", "Software Development", "Engineering Practice"]
 category: "AI & Development"
 readTime: "8 min read"
 featured: true
+services: ["ai-integration"]
+practices: ["ai-automation", "product-engineering"]
+seoTitle: "AI Development Trends"
 ---
 
-AI hype is exhausting. Every startup is "AI-powered." Every agency is an "AI specialist." Every product has slapped "AI" on their feature list.
+The gap between what AI can do in a demo and what it can do in a product somebody depends on is wider than the marketing suggests. Not because the models are weak. Because a demo gets to pick its inputs and a product does not.
 
-But behind the noise, real AI trends are transforming how we build software. After shipping 50+ AI-integrated products in 2024, here's what's actually working in 2025—and what's still just hype.
+What follows is the version we would give a client on a call: what we reach for, what we have watched fail, and the one question that sorts the two.
 
-## Trend #1: AI Code Generation (Actually Delivering)
+## The test
 
-**The Hype:** "AI will replace developers by 2025."
+Before any of the specifics, this is the thing worth internalising.
 
-**The Reality:** AI is making developers 3-5x more productive, not replacing them.
+**Can the user tell when it is wrong?**
 
-### What's Working
-- **GitHub Copilot / Cursor / Claude Code:** These aren't replacing developers—they're supercharging them
-- **Boilerplate elimination:** CRUD operations, API endpoints, test generation
-- **Documentation automation:** Code comments, API docs, user guides written alongside code
+Every AI feature that survives contact with real users answers yes. Every one that gets quietly switched off answers no. It really is that blunt. A model that is right ninety per cent of the time is enormously useful when the other ten per cent is visible, and actively dangerous when it isn't, because people stop checking after about a week and then the errors compound in silence.
 
-### Real Impact
-- Junior developers working at mid-level productivity
-- Senior developers spending 70% less time on repetitive code
-- Bug detection during development (not post-deployment)
+Hold that up against anything you are being sold.
 
-### What's NOT Working
-- **Fully autonomous coding:** AI still produces bugs and security issues
-- **Complex architecture decisions:** Humans still needed for system design
-- **Understanding business logic:** AI can't infer your unique requirements
+## Retrieval, not recall
 
-**Our Take:** AI code tools are mandatory in 2025. Not using them is like not using Google in 2005. Teams using AI ship 2-3x faster.
+The single biggest shift in how competent teams build with language models: stop asking the model to know things.
 
-## Trend #2: RAG (Retrieval-Augmented Generation) is the New Standard
+The pattern is straightforward. A question comes in. You search your own content for the passages that bear on it. You hand those passages to the model and ask it to answer using them, citing which passage it used. The model does the phrasing. Your search does the knowing.
 
-**The Hype:** "Just throw your data at ChatGPT!"
+This works because it satisfies the test. If the retrieved passage was wrong, the citation shows it and somebody can check. It also fails in a useful direction: when nothing relevant comes back, a well-built system says so rather than inventing something plausible.
 
-**The Reality:** Naive AI integrations fail. RAG is the solution.
+The work is not the prompt. It is in chunking your documents sensibly, choosing an embedding approach, and then actually evaluating whether the right passage comes back for a realistic set of questions. That evaluation is the step teams skip, and skipping it is why so many internal knowledge assistants are quietly abandoned three months after launch.
 
-### What RAG Solves
-- **Hallucinations:** AI making up facts
-- **Outdated information:** GPT's knowledge cutoff
-- **Company-specific knowledge:** AI knowing your products/policies
+## Extraction with a threshold
 
-### How It Works
-```
-User Question → Search Your Database → Inject Context → GPT Response
-```
+Reading something unstructured and returning structured fields: a receipt, an invoice, a form, an email. Models are genuinely good at this now.
 
-### Real Example: Customer Support Bot
-**Without RAG:**
-- 60% accuracy
-- Made up product details
-- Couldn't answer company-specific questions
+What makes it safe is the threshold. Anything the model is not confident about goes to a person instead of straight into the database. We use exactly this in [Larder](/work/larder) for receipt capture — photograph a receipt, get stock movements, with anything uncertain held for review.
 
-**With RAG:**
-- 92% accuracy
-- Always references actual documentation
-- Handles complex policy questions
+Without a threshold you have a system that is right most of the time and silently wrong the rest, which is worse than no automation at all, because now nobody is checking and the errors have an air of authority.
 
-**Cost:** Same API costs, 10-15 hours additional development
+## Code assistance, where the decision is already made
 
-**Our Take:** If you're building anything knowledge-based (support bots, search, Q&A), RAG isn't optional—it's required.
+Once you know what you want — this endpoint, these fields, this validation — generating it is faster than it was three years ago. Test scaffolding too. And getting oriented in an unfamiliar codebase, which on modernisation work is the biggest practical gain we see.
 
-## Trend #3: AI Agents (Early But Promising)
+Where it stops helping is the part before that: deciding what to build. A model will implement the wrong thing quickly and with total confidence, and the expensive failures in software have always been specification failures rather than typing failures.
 
-**The Hype:** "AI agents will run your entire business!"
+We went into the economics of this separately in [what AI actually changes about the cost of building software](/blog/how-ai-reduces-software-development-costs).
 
-**The Reality:** Simple agent workflows are working; complex ones aren't ready.
+## Features in the flow, not a chatbot in the corner
 
-### What's Working Now
-- **Email triage and draft responses:** 80% reduction in customer support time
-- **Data extraction from documents:** OCR + AI understanding
-- **Simple research tasks:** Gather info, summarize, present findings
-- **Automated testing:** AI writes tests, runs them, reports issues
+A chatbot is optional. Users have to decide to open it, and most never do. It competes with the task they came to do.
 
-### What's Not Ready
-- **Multi-step complex decision-making:** Fails when encountering edge cases
-- **Autonomous debugging:** Can't reliably fix its own errors
-- **Financial/legal decisions:** Too risky without human oversight
+The same capability placed inside the workflow behaves completely differently. A "generate description" button in the product editor gets used, because the person is already writing a description. Natural-language search gets used because everybody uses search. A summary at the top of a long document gets read because it is in the way.
 
-### Example: Content Moderation Agent
-**Task:** Review user-submitted content for policy violations
+Nothing about the model changes between those two. What changes is that the feature stops asking to be chosen.
 
-**Workflow:**
-1. User submits content
-2. AI analyzes text/image
-3. If flagged: AI drafts explanation, human reviews
-4. If unclear: Escalates to human immediately
-5. Human approves/overrides decision
+If a proposal's centrepiece is a chat window, ask what happens to the value if nobody opens it.
 
-**Result:** 90% reduction in moderator workload, 99.5% accuracy (with human oversight)
+## Agents, carefully
 
-**Our Take:** Start with single-task agents (research, summarization, data extraction). Don't try to build multi-agent systems yet—the tech isn't there.
+An agent — a model that plans, calls tools and loops until it thinks it is finished — is real and it is early.
 
-## Trend #4: Embedded AI Features (Not Separate Chatbots)
+Single-task versions work now. Pull these figures out of this document set. Summarise this thread. Draft the reply for a person to send. Narrow scope, bounded tools, a human at the end.
 
-**The Hype:** "Add a chatbot to your site!"
+Multi-step autonomous systems that chain a dozen decisions together are still mostly demos. The failure mode is compounding: a small error at step two becomes a confident wrong conclusion at step nine, and nothing in between flagged it. If you are building one, the useful discipline is checkpointing — make each step's output inspectable, and make the loop stoppable.
 
-**The Reality:** Users want AI features integrated into their workflow, not separate chatbots.
+## Local models, for a narrow set of reasons
 
-### What Users Actually Want
+Running a smaller model on your own infrastructure makes sense in three situations: the data legally cannot leave, the volume is high enough that per-token pricing dominates your costs, or you need latency that a network round trip cannot give you.
 
-**Bad:** Chatbot in the corner that users have to ask questions
+Outside those, hosted models are better and cheaper than the engineering time you would spend. Smaller open models have improved a great deal, but "improved a great deal" is not the same as "matches the frontier", and on messy real-world inputs the gap still shows.
 
-**Good:** AI features embedded where users already work:
-- "Generate product description" button in CMS
-- "Summarize this document" in file viewer
-- "Suggest next steps" in project management tool
-- "Draft email response" in inbox
+The honest version of this decision is arithmetic, not ideology. Work out your monthly token spend, then compare it against the cost of somebody maintaining an inference stack.
 
-### Case Study: E-Commerce Platform
-**Old Approach:** AI chatbot for product recommendations
-- 5% usage rate
-- Users found it gimmicky
-- Added complexity
+## Two things still not working
 
-**New Approach:** AI-powered features throughout:
-- Auto-generate product descriptions (85% adoption)
-- Smart search with natural language (92% usage)
-- Personalized homepage (100% of users see it)
+**Fully automated testing.** Generating test cases around code you have written, yes. Deciding which behaviours are worth asserting, no, and that judgement is most of what makes [a test suite worth having](/blog/the-test-suite-that-earns-its-keep). A suite of generated tests that assert whatever the code currently does will happily lock in a bug.
 
-**Result:** 22% increase in conversions
+**Unsupervised anything that touches money or permissions.** The failure modes are silent and the blast radius is large. Draft, suggest, flag for review — fine. Execute without a person, not yet.
 
-**Our Take:** Stop building chatbots. Start embedding AI where users already work.
+## What we would actually do
 
-## Trend #5: AI-First Product Design
+If you are considering a first AI feature, pick the one where a user would immediately notice a wrong answer, and where a wrong answer costs an eyebrow rather than money. Ship that, watch what people actually correct, and let the correction log tell you whether the thing is improving.
 
-**The Hype:** "Retrofit AI into existing products!"
-
-**The Reality:** Products designed for AI from day one perform better.
-
-### Traditional Product Design
-1. Design feature
-2. Build feature
-3. Try to add AI after
-4. AI feels bolted-on
-
-### AI-First Design
-1. Ask: "What can AI do uniquely well here?"
-2. Design around AI capabilities
-3. Build AI as core functionality
-4. Human tasks complement AI
-
-### Example: Writing Tool
-**Traditional:** Text editor with "AI assist" button
-**AI-First:** AI suggests as you type, learns your style, auto-formats, checks tone
-
-The difference? AI-first products feel magical. Retrofitted AI feels like a gimmick.
-
-**Our Take:** If rebuilding a product in 2025, design for AI from scratch. If adding AI to existing products, find workflows where AI adds unique value—don't just add a chatbot.
-
-## Trend #6: Local AI Models (Privacy + Cost)
-
-**The Hype:** "Run GPT-4 locally!"
-
-**The Reality:** Smaller, specialized models running locally are viable for specific tasks.
-
-### When Local Models Win
-- **Privacy-sensitive applications:** Healthcare, legal, financial
-- **High-volume low-complexity tasks:** Classification, sentiment analysis
-- **Offline functionality:** Mobile apps without internet
-- **Cost control:** No per-token API fees
-
-### Example: Medical Note Transcription
-**Cloud AI (GPT-4):**
-- Concern: Patient data leaves server
-- Cost: $0.03 per note
-- At scale: $30K/month for 1M notes
-
-**Local AI (Fine-tuned Llama 3):**
-- Data stays on-premise (HIPAA compliant)
-- Cost: $5K one-time fine-tuning + server costs
-- At scale: $2K/month server costs
-
-**Our Take:** For high-volume, specialized tasks with privacy needs, local AI makes sense. For general-purpose AI, cloud APIs are still better.
-
-## Trend #7: AI Testing and QA
-
-**The Hype:** "AI will test everything automatically!"
-
-**The Reality:** AI-generated tests are dramatically improving QA speed.
-
-### What's Working
-- **Unit test generation:** AI writes tests as you code
-- **Edge case identification:** AI suggests test cases you didn't think of
-- **Visual regression testing:** AI detects UI changes
-- **Accessibility testing:** AI catches a11y issues
-
-### Time Savings
-**Traditional Testing Timeline:**
-- Write feature: 8 hours
-- Write tests: 4 hours
-- **Total: 12 hours**
-
-**AI-Assisted Testing:**
-- Write feature: 8 hours
-- Review AI-generated tests: 30 minutes
-- **Total: 8.5 hours**
-
-**Savings:** 30% reduction in development time
-
-**Our Take:** AI test generation is mature enough for production. Use it.
-
-## Trend #8: Multimodal AI (Voice + Vision + Text)
-
-**The Hype:** "AI can do anything!"
-
-**The Reality:** Combining multiple AI types (text, image, audio) creates powerful new capabilities.
-
-### What's Emerging
-- **Voice interfaces:** Natural conversations with apps
-- **Image understanding:** Upload photo, get intelligent analysis
-- **Document intelligence:** Read complex PDFs, extract structured data
-- **Video analysis:** Understand video content, generate summaries
-
-### Example: Real Estate Platform
-**Feature:** Upload property photos, AI generates:
-- Listing description
-- Highlighted features
-- Pricing recommendations based on visual condition
-- Suggested staging improvements
-
-**User Impact:** Listings created in 5 minutes instead of 2 hours
-
-**Our Take:** Multimodal AI is mature enough for production. If your product involves images, audio, or video, explore multimodal models.
-
-## What's Still Hype (Don't Waste Time)
-
-### 1. "AGI is Coming in 2025"
-No. We're nowhere close to general AI. Build for narrow, specific use cases.
-
-### 2. "AI Will Replace Your Team"
-No. AI augments teams. Companies trying to replace humans entirely are failing.
-
-### 3. "No-Code AI Builders"
-These work for simple demos. Real products need real code.
-
-### 4. "Blockchain + AI"
-Still looking for a problem to solve. Skip.
-
-### 5. "Quantum AI"
-Cool research. Not relevant for products yet.
-
-## Practical AI Strategy for 2025
-
-### Phase 1: Use AI Tools (Month 1)
-- Adopt GitHub Copilot or Cursor
-- Use ChatGPT/Claude for problem-solving
-- Integrate AI into your development workflow
-
-### Phase 2: Add AI Features (Month 2-3)
-- Identify one repetitive user task
-- Build AI feature to automate it
-- Measure impact (time saved, increased conversions)
-
-### Phase 3: AI-First Features (Month 4-6)
-- Design new features AI-first
-- Use RAG for knowledge-based features
-- Implement multimodal AI where relevant
-
-### Phase 4: Scale and Optimize (Month 7+)
-- Optimize costs (caching, smaller models)
-- Fine-tune models for your specific use case
-- Consider local models for high-volume tasks
-
-## Conclusion
-
-The AI revolution isn't coming—it's here. But it's not replacing developers, designers, or product managers. It's making them exponentially more productive.
-
-The winners in 2025 aren't those who add AI features for the sake of it. They're the ones who identify where AI uniquely adds value and integrate it thoughtfully.
-
-**Three Takeaways:**
-1. Use AI development tools now (Copilot, Cursor, Claude Code)
-2. Implement RAG for any knowledge-based features
-3. Embed AI into workflows, don't just add chatbots
-
-The companies adopting these trends today will dominate their markets tomorrow.
+That is unglamorous advice. It is also the difference between a feature that is still switched on next year and one that quietly stopped being used in March.
 
 ---
 
-**Want to add AI to your product?** [Get in touch](/#contact) and we'll show you where AI can deliver maximum ROI.
+**Want to add AI to your product?** [Tell us what you are hoping it will do](/contact) and we'll tell you honestly whether it is the right tool for it.

@@ -1,143 +1,130 @@
-"use client"
+import { ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { TimelineDiagram } from "@/components/diagrams"
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
-import { Card } from "@/components/ui/card"
-import { MessageSquare, Lightbulb, Code, Rocket } from "lucide-react"
-
-const steps = [
+/**
+ * The four weeks, honestly.
+ *
+ * The previous version claimed AI made us "10x faster than traditional
+ * methods" and promised delivery in "days, not months", which contradicted
+ * every service page and was not a number anyone could verify. The real reason
+ * four weeks works is the platform, and that argument is stronger because it
+ * is checkable.
+ *
+ * Each week states what *you* do as well as what we do, because the most
+ * common cause of slippage on these projects is not engineering — it is
+ * waiting for a decision.
+ */
+const WEEKS = [
   {
-    icon: MessageSquare,
-    title: "Discovery Call",
-    description:
-      "We start with a free consultation to understand your goals, challenges, and vision for the project.",
-    duration: "30 minutes",
+    n: "Week 1",
+    label: "Scope",
+    body: "We watch how the work happens today, get access to your systems, and write a specification you sign. Screens, rules, edge cases, and an explicit list of what is out of scope. No code is written this week.",
+    you: "Two or three hours: a walkthrough of your process, and reading the spec properly before signing it.",
+    out: "A signed specification and a fixed price that does not move.",
   },
   {
-    icon: Lightbulb,
-    title: "Strategy & Planning",
-    description:
-      "Our team designs a tailored solution with detailed scope, timeline, and cost breakdown.",
-    duration: "24-48 hours",
+    n: "Week 2",
+    label: "Build",
+    body: "Core data model, authentication and the primary workflow. Because accounts, permissions and billing already exist on our platform, week two starts at the part that is actually yours.",
+    you: "Friday demo, about an hour. You click a real thing with your real data in it.",
+    out: "Working software you can use, not a percentage.",
   },
   {
-    icon: Code,
-    title: "AI-Powered Development",
-    description:
-      "Using cutting-edge AI tools, we build your solution 10x faster than traditional methods.",
-    duration: "Days, not months",
+    n: "Week 3",
+    label: "Build",
+    body: "Reporting, permissions, integrations and the edge cases that only surface once somebody has used it. This is the week where the things you did not think of get caught.",
+    you: "Second Friday demo, plus decisions on anything the first demo raised.",
+    out: "Feature-complete against the spec.",
   },
   {
-    icon: Rocket,
-    title: "Launch & Support",
-    description:
-      "We deploy your project and provide ongoing support to ensure everything runs smoothly.",
-    duration: "Ongoing",
+    n: "Week 4",
+    label: "Ship",
+    body: "Deployment, monitoring, migration of your existing data, two recorded training sessions, and documentation written for people rather than engineers.",
+    you: "Training attendance, and a decision on who owns it internally.",
+    out: "Live, plus the repository, documentation and 30 days of fixes.",
   },
 ]
 
 export function HowItWorks() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
   return (
-    <section
-      id="how-it-works"
-      ref={ref}
-      className="relative py-16 md:py-24 bg-secondary/30 overflow-hidden"
-    >
-      <div
-        className="absolute top-1/3 right-1/3 h-[300px] w-[300px] md:h-[600px] md:w-[600px] rounded-full bg-foreground/10 md:bg-foreground/20 blur-2xl md:blur-3xl animate-glow-pulse"
-        style={{ animationDelay: "0s" }}
-      />
-      <div
-        className="absolute bottom-1/4 left-1/3 h-[250px] w-[250px] md:h-[500px] md:w-[500px] rounded-full bg-foreground/15 md:bg-foreground/25 blur-2xl md:blur-3xl animate-glow-pulse"
-        style={{ animationDelay: "2s" }}
-      />
-
-      <div className="container mx-auto px-4 md:px-6 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <h2 className="mb-4 text-2xl sm:text-3xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
-            How It Works
-          </h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            From idea to launch in four simple steps. Our streamlined process
-            ensures quality delivery at lightning speed.
-          </p>
-        </motion.div>
-
-        <div className="relative max-w-5xl mx-auto">
-          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-border to-transparent -translate-y-1/2" />
-
-          <div className="grid gap-8 md:grid-cols-4 relative">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative"
-              >
-                <div className="hidden md:flex absolute -top-8 left-1/2 -translate-x-1/2 h-16 w-16 items-center justify-center rounded-full bg-background border-4 border-primary/20 z-10">
-                  <span className="text-xl font-bold text-primary">
-                    {index + 1}
-                  </span>
-                </div>
-
-                <motion.div whileHover={{ y: -4 }}>
-                  <Card className="h-full border-border bg-card p-6 transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
-                    <div className="mb-4 flex md:hidden h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <span className="text-lg font-bold">{index + 1}</span>
-                    </div>
-
-                    <motion.div
-                      className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary"
-                      whileHover={{ rotate: 360, scale: 1.05 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <step.icon className="h-6 w-6" />
-                    </motion.div>
-
-                    <h3 className="mb-2 text-lg font-bold text-card-foreground min-h-[3.5rem] flex items-center">
-                      {step.title}
-                    </h3>
-
-                    <p className="mb-3 text-sm text-muted-foreground leading-relaxed">
-                      {step.description}
-                    </p>
-
-                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                      {step.duration}
-                    </div>
-                  </Card>
-                </motion.div>
-              </motion.div>
-            ))}
+    <section id="how-it-works" className="border-t border-border py-20 md:py-28">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="mb-5 inline-flex rounded-md bg-accent px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-accent-foreground">
+              How it works
+            </p>
+            <h2 className="mb-5 text-balance font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.038em] text-foreground md:text-5xl">
+              Four weeks, in order.
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              Average, not best case. Mobile runs four to six because app store
+              review is outside anybody&rsquo;s control, and genuinely larger projects
+              get quoted as phases instead.
+            </p>
           </div>
+
+          <Button
+            variant="outline"
+            className="shrink-0 border-border bg-transparent font-semibold text-foreground hover:bg-secondary hover:text-foreground"
+            asChild
+          >
+            <a href="/services/product-discovery">
+              What week one produces
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
+          </Button>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-12 text-center"
-        >
-          <Card className="inline-block border-primary/20 bg-gradient-to-r from-primary/5 to-transparent p-6">
-            <p className="text-sm text-muted-foreground">
-              <span className="font-semibold text-foreground">
-                Average project timeline:
-              </span>{" "}
-              Most projects are delivered in 1-4 weeks, compared to 2-6 months
-              with traditional development.
-            </p>
-          </Card>
-        </motion.div>
+        <TimelineDiagram className="mb-10" />
+
+        <ol className="grid gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-2 xl:grid-cols-4">
+          {WEEKS.map((w, i) => (
+            <li
+              key={w.n}
+              className="ss-reveal flex flex-col bg-background p-7"
+              style={{ animationDelay: `${i * 60}ms` }}
+            >
+              <div className="mb-5 flex items-baseline justify-between gap-3">
+                <p className="font-display text-xl font-extrabold tracking-[-0.03em] text-foreground">
+                  {w.n}
+                </p>
+                <p className="font-mono text-[0.6rem] uppercase tracking-[0.14em] text-primary">
+                  {w.label}
+                </p>
+              </div>
+
+              <p className="mb-6 text-[0.92rem] leading-relaxed text-muted-foreground">
+                {w.body}
+              </p>
+
+              <div className="mt-auto space-y-4 border-t border-border pt-5">
+                <div>
+                  <p className="mb-1 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-muted-foreground">
+                    Your time
+                  </p>
+                  <p className="text-[0.85rem] leading-snug text-foreground/75">{w.you}</p>
+                </div>
+                <div>
+                  <p className="mb-1 font-mono text-[0.58rem] uppercase tracking-[0.14em] text-muted-foreground">
+                    You end up with
+                  </p>
+                  <p className="text-[0.85rem] leading-snug text-foreground/75">{w.out}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <p className="mt-8 max-w-3xl text-[0.95rem] leading-relaxed text-muted-foreground">
+          <span className="font-semibold text-foreground">
+            Four weeks of our time, not yours.
+          </span>{" "}
+          You are looking at roughly three hours a week. The most common cause of
+          delay on these projects is not engineering &mdash; it is waiting for a
+          decision, which is why we ask for one named person who can make them.
+        </p>
       </div>
     </section>
   )

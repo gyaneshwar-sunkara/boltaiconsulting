@@ -1,114 +1,99 @@
-"use client"
+import { ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
-import { motion } from "framer-motion"
-import { Card } from "@/components/ui/card"
-import { Code2, Layers, Wrench, Zap } from "lucide-react"
+/**
+ * The previous version of this section called stack flexibility "Our
+ * Superpower" and promised we were "technology agnostic" with "zero migration
+ * friction". None of that was true, and worse, it contradicted the honest
+ * position stated on every service page: we have defaults, and if you need an
+ * architecture Sill does not support we are the wrong firm.
+ *
+ * Nobody is technology agnostic. Saying so out loud, and then being precise
+ * about when we use your stack instead of ours, is a more useful answer and a
+ * more credible one.
+ */
+const RULES = [
+  {
+    when: "You have a team who knows your stack",
+    then: "We work in yours",
+    body: "Django, Rails, .NET, Laravel, Go. If your engineers maintain it after we leave, their familiarity is worth more than any efficiency we would gain by moving you somewhere we prefer.",
+  },
+  {
+    when: "You are starting from nothing",
+    then: "We use ours",
+    body: "TypeScript end to end on the Sill platform, because that is where sixty per cent of the build already exists. This is the case where our defaults save you real money.",
+  },
+  {
+    when: "You have a system that works but is unloved",
+    then: "We extend rather than replace",
+    body: "A layer in front, new work against a clean interface, old system untouched. Replacing something that functions because it is unfashionable is how budgets disappear.",
+  },
+  {
+    when: "You want an architecture Sill does not support",
+    then: "We are the wrong firm",
+    body: "A different language, a hosting arrangement we do not run, a design we think is a mistake. We would rather say that on the first call than take the work and manage the disappointment later.",
+  },
+]
 
 export function TechFlexibility() {
-  const benefits = [
-    {
-      icon: Layers,
-      title: "Your Stack, Your Way",
-      description: "Already have a tech stack? We seamlessly integrate with your existing infrastructure and tools.",
-    },
-    {
-      icon: Code2,
-      title: "Technology Agnostic",
-      description: "We don't force you into our preferred stack. We work with what's best for your project.",
-    },
-    {
-      icon: Wrench,
-      title: "Zero Migration Friction",
-      description: "No need to rebuild everything. We extend and enhance your current systems.",
-    },
-    {
-      icon: Zap,
-      title: "Expert Recommendations",
-      description: "Need guidance? We'll recommend the optimal tech stack based on your specific requirements.",
-    },
-  ]
-
   return (
-    <section className="py-16 md:py-24 overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" />
+    <section className="bd bd-spot overflow-hidden border-t border-border py-20 md:py-28">
 
       <div className="container relative mx-auto px-4 md:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
-        >
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm text-primary">
-            <Layers className="h-4 w-4" />
-            <span>Our Superpower</span>
+        <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="mb-5 inline-flex rounded-md bg-accent px-3 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-primary">
+              Technology
+            </p>
+            <h2 className="mb-5 text-balance font-display text-3xl font-extrabold leading-[1.08] tracking-[-0.038em] text-foreground md:text-5xl">
+              Nobody is technology agnostic.
+            </h2>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              Every firm claiming otherwise has a stack they reach for by
+              default. Ours is TypeScript on the Sill platform. Here is exactly
+              when we use yours instead, and when you should hire somebody else.
+            </p>
           </div>
-          <h2 className="mb-6 text-3xl sm:text-4xl font-bold tracking-tight text-foreground md:text-5xl text-balance">
-            We Adapt to Your Existing Infrastructure
-          </h2>
-          <p className="mx-auto max-w-3xl text-lg text-muted-foreground leading-relaxed">
-            Unlike other agencies that force you into their preferred stack, we build solutions that work with <span className="font-semibold text-foreground">your</span> technology choices. Whether you're on AWS or Azure, React or Angular, Python or Node.js - we adapt to you.
-          </p>
-        </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {benefits.map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card className="p-6 border-border bg-card/50 backdrop-blur-sm hover:border-primary/50 hover:bg-card transition-all h-full">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <benefit.icon className="h-6 w-6" />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold text-card-foreground">
-                  {benefit.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {benefit.description}
-                </p>
-              </Card>
-            </motion.div>
-          ))}
+          <Button
+            variant="outline"
+            className="shrink-0 border-border bg-transparent font-semibold text-foreground hover:bg-secondary hover:text-foreground"
+            asChild
+          >
+            <a href="/capabilities">
+              What we work with
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
+          </Button>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12"
-        >
-          <Card className="p-8 md:p-12 border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="flex-1">
-                <h3 className="mb-3 text-2xl md:text-3xl font-bold text-foreground whitespace-nowrap">
-                  No Tech Stack Lock-In
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  We believe your business needs should drive technology decisions - not the other way around. That's why we're proficient in dozens of technologies and frameworks, giving you complete freedom to choose what works best for your team and product.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2 justify-center md:justify-end md:max-w-md">
-                {["React", "Vue", "Angular", "Next.js", "Python", "Node.js", "Go", ".NET", "AWS", "Azure", "GCP"].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1.5 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20 whitespace-nowrap"
-                  >
-                    {tech}
-                  </span>
-                ))}
-                <span className="px-3 py-1.5 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20 whitespace-nowrap">
-                  +50 more
-                </span>
-              </div>
+        <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-2">
+          {RULES.map((r, i) => (
+            <div
+              key={r.when}
+              className="ss-reveal flex flex-col bg-background p-7 md:p-8"
+              style={{ animationDelay: `${(i % 2) * 60}ms` }}
+            >
+              <p className="mb-2 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted-foreground">
+                If
+              </p>
+              <p className="mb-5 font-display text-lg font-bold leading-snug tracking-[-0.02em] text-foreground">
+                {r.when}
+              </p>
+
+              <p className="mb-2 font-mono text-[0.6rem] uppercase tracking-[0.14em] text-muted-foreground">
+                Then
+              </p>
+              <p className="mb-4 font-display text-lg font-extrabold leading-snug tracking-[-0.025em] text-primary">
+                {r.then}
+              </p>
+
+              <p className="mt-auto border-t border-border pt-4 text-[0.92rem] leading-relaxed text-muted-foreground">
+                {r.body}
+              </p>
             </div>
-          </Card>
-        </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
